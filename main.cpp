@@ -1,33 +1,28 @@
 #include <iostream>
 #include <iomanip>
+#include "main_menu_display.h"
 #include "schedule_management.h"
 #include "attendance_tracker.h"
 #include "grade_tracker.h"
 
 using namespace std;
 
-void display_main_menu() {
-	cout << "******************************************************** " << endl;
-	cout << "   Welcome to your Personal Class Management System!  " << endl;
-	cout << setw(5) <<  "Chose where to navigate " << setw(5) <<  endl; // figure out how to center
-	cout << "********************************************************" << endl;
-	cout << "1. Schedule" << endl;
-	cout << "2. Attendance" << endl;
-	cout << "3. Record & View Grades" << endl;
-	cout << "4. Exit" << endl;
-	cout << "Enter your choice: ";
-}
-
 int main() {
-
 	load_classes();
 	load_attendance();
 	load_grades();
 
 	int choice;
 	do {
-		display_main_menu();
+		main_menu_display();
 		cin >> choice;
+
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max());
+			cout << "Invalid input. Please enter a number between 1-4 " << endl;
+			continue;
+		}
 
 		switch (choice) {
 			case 1:

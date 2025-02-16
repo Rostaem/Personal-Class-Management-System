@@ -1,0 +1,10 @@
+# ninja log v6
+30	4445	1739673247632155347	CMakeFiles/Personal_Class_Management_System.dir/grade_tracker.cpp.o	d44f3507e792e0e
+4445	6416	1739673252046437953	Personal_Class_Management_System	e02a856b3a5a703
+30	4417	1739673247632000301	CMakeFiles/Personal_Class_Management_System.dir/attendance_tracker.cpp.o	2917fc2fe936d151
+2	86	1739676650748981896	build.ninja	f83f126ed8162c71
+28	4418	1739673247630286099	CMakeFiles/Personal_Class_Management_System.dir/schedule_management.cpp.o	f85366e02b5f7abe
+16	3912	1739676553546721024	CMakeFiles/Personal_Class_Management_System.dir/main.cpp.o	63daa15c75c7d00b
+3	74	1739676650748981896	build.ninja	f83f126ed8162c71
+16	659	1739676650772418120	CMakeFiles/Personal_Class_Management_System.dir/main_menu_display.cpp.o	3b1aa172d61e82a8
+659	854	1739676651416075378	Personal_Class_Management_System	f721178cbf87dcdf
