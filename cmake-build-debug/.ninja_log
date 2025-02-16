@@ -1,17 +1,12 @@
 # ninja log v6
 16	659	1739676650772418120	CMakeFiles/Personal_Class_Management_System.dir/main_menu_display.cpp.o	3b1aa172d61e82a8
-21	611	1739681131991515514	CMakeFiles/Personal_Class_Management_System.dir/main.cpp.o	63daa15c75c7d00b
-7	769	1739686049688353693	CMakeFiles/Personal_Class_Management_System.dir/schedule_management.cpp.o	f85366e02b5f7abe
-3	74	1739689712605218468	build.ninja	f83f126ed8162c71
-6	810	1739685673560495352	CMakeFiles/Personal_Class_Management_System.dir/attendance_tracker.cpp.o	2917fc2fe936d151
-770	951	1739686050450688143	Personal_Class_Management_System	f721178cbf87dcdf
-30	4445	1739673247632155347	CMakeFiles/Personal_Class_Management_System.dir/grade_tracker.cpp.o	d44f3507e792e0e
-3	74	1739689712605218468	build.ninja	f83f126ed8162c71
-18	4320	1739689712630632742	CMakeFiles/Personal_Class_Management_System.dir/main.cpp.o	63daa15c75c7d00b
 19	4321	1739689712631957478	CMakeFiles/Personal_Class_Management_System.dir/utils/main_menu_display.cpp.o	6c98583cbb90166d
+18	4320	1739689712630632742	CMakeFiles/Personal_Class_Management_System.dir/main.cpp.o	63daa15c75c7d00b
+7	769	1739686049688353693	CMakeFiles/Personal_Class_Management_System.dir/schedule_management.cpp.o	f85366e02b5f7abe
+3	74	1739691297141641711	build.ninja	f83f126ed8162c71
 18	4437	1739689712631080931	CMakeFiles/Personal_Class_Management_System.dir/utils/attendance_tracker.cpp.o	d09b3c6a0771fe26
-18	4450	1739689712630940479	CMakeFiles/Personal_Class_Management_System.dir/utils/schedule_management.cpp.o	9a09bb93499980fe
-19	4464	1739689712631560370	CMakeFiles/Personal_Class_Management_System.dir/utils/grade_tracker.cpp.o	5e50f72e66c8600
-4464	4654	1739689717076310496	Personal_Class_Management_System	a06b0282ef2a8743
-5	749	1739689943951499547	CMakeFiles/Personal_Class_Management_System.dir/utils/grade_tracker.cpp.o	5e50f72e66c8600
+30	4445	1739673247632155347	CMakeFiles/Personal_Class_Management_System.dir/grade_tracker.cpp.o	d44f3507e792e0e
+6	810	1739685673560495352	CMakeFiles/Personal_Class_Management_System.dir/attendance_tracker.cpp.o	2917fc2fe936d151
 749	938	1739689944695258277	Personal_Class_Management_System	a06b0282ef2a8743
+18	4450	1739689712630940479	CMakeFiles/Personal_Class_Management_System.dir/utils/schedule_management.cpp.o	9a09bb93499980fe
+5	749	1739689943951499547	CMakeFiles/Personal_Class_Management_System.dir/utils/grade_tracker.cpp.o	5e50f72e66c8600
