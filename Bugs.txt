@@ -1,0 +1,1 @@
+1. regarding input validation (checks for data type (int) and bounds (int (1-4)))

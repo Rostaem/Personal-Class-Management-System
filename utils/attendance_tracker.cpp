@@ -1,11 +1,12 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <string>
 #include <fstream>
 #include "attendance_tracker.h"
-
+#define WIDTH 60
+// Purpose : Manages attendance.
 using namespace std;
-
 
 struct Attendance {
     string class_name;
@@ -15,16 +16,30 @@ struct Attendance {
 
 vector<Attendance> attendance_records;
 
+// Purpose : displays menu and handles user input.
 void track_attendance() {
     int choice;
     do {
-        cout << "=== Attendance Tracker ===" << endl;
-        cout << "1. Mark Attendance" << endl;
+        string title = "Attendance Tracker";
+        int centering = (WIDTH - title.length()) / 2;
+        cout << setfill('=') << setw(centering) << "" << title << setfill('=') << setw(WIDTH  - title.length() - centering) << "" << endl;
+        cout << "1. Track Attendance" << endl;
         cout << "2. Calculate Attendance Percentage" << endl;
         cout << "3. Display Attendance Records" << endl;
         cout << "4. Back to Main Menu" << endl;
-        cout << "Enter your choice: ";
+        cout << "Enter your choice (1-4): ";
         cin >> choice;
+        if (cin.fail()){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max());
+          cout << "Invalid input, please enter a number between 1 and 4. " << endl;
+          continue;
+          }
+
+        if (choice < 1 || choice > 4) {
+          cout << " Invalid Input. Enter a number between 1 and 4" << endl;
+          continue;
+        }
 
         switch (choice) {
             case 1:

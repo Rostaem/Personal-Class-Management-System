@@ -2,7 +2,11 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iomanip>
+#include <limits>
 #include "schedule_management.h"
+
+#define WIDTH 50
 
 using namespace std;
 
@@ -15,18 +19,40 @@ struct Class {
 
 vector<Class> classes;
 
+// Purpose: Manage the schedule
 void manage_schedule() {
     int choice;
     do {
-        cout << "=== Schedule Management ===" << endl;
+        string title = "Schedule Management";
+        int centering = (WIDTH - title.length()) / 2;
+        cout << "\n" << setfill('=') << setw(centering) << ""
+             << title
+             << setfill('=') << setw(WIDTH - title.length() - centering) << ""
+             << endl;
+
         cout << "1. Add Class" << endl;
         cout << "2. Delete Class" << endl;
         cout << "3. Edit Class" << endl;
         cout << "4. View Classes" << endl;
         cout << "5. Back to Main Menu" << endl;
-        cout << "Enter your choice: ";
+        cout << "Enter your choice (1-5): ";
+
         cin >> choice;
 
+        // Input validation
+        if (cin.fail()) {
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please enter a number between 1 and 5." << endl;
+            continue; // Re-prompt the user
+        }
+
+        if (choice < 1 || choice > 5) {
+            cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
+            continue; // Re-prompt the user
+        }
+
+        // Handle valid input
         switch (choice) {
             case 1:
                 add_class();
@@ -43,17 +69,22 @@ void manage_schedule() {
             case 5:
                 cout << "Returning to Main Menu..." << endl;
                 break;
-            default:
-                cout << "Invalid input, entere a numnber between 1-4." << endl;
         }
     } while (choice != 5);
 }
 
+// Purpose: Add a new class
 void add_class() {
     Class new_class;
     cout << "Enter class name: ";
     cin.ignore();
     getline(cin, new_class.name);
+
+    if (new_class.name.empty()) {
+        cout << "Class name cannot be empty. Please try again." << endl;
+        return;
+    }
+
     cout << "Enter class time: ";
     getline(cin, new_class.time);
     cout << "Enter professor's name: ";
@@ -65,6 +96,7 @@ void add_class() {
     cout << "Class added successfully!" << endl;
 }
 
+// Purpose: Delete a class
 void delete_class() {
     string class_name;
     cout << "Enter the name of the class to delete: ";
@@ -82,6 +114,7 @@ void delete_class() {
     cout << "Class not found." << endl;
 }
 
+// Purpose: Edit a class
 void edit_class() {
     string class_name;
     cout << "Enter the name of the class to edit: ";
@@ -103,6 +136,7 @@ void edit_class() {
     cout << "Class not found." << endl;
 }
 
+// Purpose: View all classes
 void view_classes() {
     if (classes.empty()) {
         cout << "No classes available." << endl;
@@ -111,11 +145,13 @@ void view_classes() {
 
     cout << "\n=== Class Schedule ===" << endl;
     for (const auto &cls : classes) {
-        cout << "Name: " << cls.name << ", Time: " << cls.time
+        cout << "Name: " << cls.name
+             << ", Time: " << cls.time
              << ", Professor: " << cls.professor << endl;
     }
 }
 
+// Purpose: Save classes to a file
 void save_classes() {
     ofstream file("data/classes_data.txt");
     if (!file) {
@@ -131,6 +167,7 @@ void save_classes() {
     cout << "Classes saved successfully." << endl;
 }
 
+// Purpose: Load classes from a file
 void load_classes() {
     ifstream file("data/classes_data.txt");
     if (!file) {

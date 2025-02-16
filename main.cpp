@@ -1,10 +1,10 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
-#include "main_menu_display.h"
-#include "schedule_management.h"
-#include "attendance_tracker.h"
-#include "grade_tracker.h"
+#include "utils/main_menu_display.h"
+#include "utils/schedule_management.h"
+#include "utils/attendance_tracker.h"
+#include "utils/grade_tracker.h"
 
 using namespace std;
 
@@ -51,7 +51,7 @@ int main() {
 			save_grades();
 			return 0;
 			default:
-				
+
 					cout << "Invalid input. Please enter a number between 1 and 4." << endl;
 		}
 	}
