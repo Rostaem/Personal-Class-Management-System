@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+# Ignore CMake build directory
+cmake-build-debug/
+
+# Ignore JetBrains IDE project files
+.idea/
+
+# Ignore other build or temporary files
+*.log
+*.tmp
+*.temp
+*.cache
+*.swp
+*.swo
