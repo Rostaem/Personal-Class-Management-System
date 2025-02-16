@@ -2,10 +2,11 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iomanip> // For centering the title
 #include "grade_tracker.h"
 
 using namespace std;
-
+const int WIDTH = 50;
 struct Grade {
     string class_name;
     vector<float> assignment_grades;
@@ -13,16 +14,30 @@ struct Grade {
 
 vector<Grade> grade_records;
 
+void print_title(const string &title) {
+
+    cout << string((WIDTH - title.length()) / 2, ' ') << title << endl;
+}
+
 void manage_grades() {
     int choice;
     do {
-        cout << "=== Grade Tracker ===" << endl;
+        print_title("=== Grade Tracker ===");
         cout << "1. Record Assignment Grade" << endl;
         cout << "2. Calculate Average Grade" << endl;
         cout << "3. Display Grades" << endl;
         cout << "4. Back to Main Menu" << endl;
         cout << "Enter your choice: ";
+
         cin >> choice;
+
+
+        while (cin.fail() || choice < 1 || choice > 4) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cout << "Invalid input. Please enter a choice between 1 and 4: ";
+            cin >> choice;
+        }
 
         switch (choice) {
             case 1:
@@ -55,6 +70,14 @@ void record_grade() {
             cout << "Enter assignment grade: ";
             cin >> grade;
 
+            // Input validation for the grade
+            while (cin.fail() || grade < 0 || grade > 100) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid grade. Please enter a grade between 0 and 100: ";
+                cin >> grade;
+            }
+
             record.assignment_grades.push_back(grade);
             cout << "Grade recorded successfully!" << endl;
             return;
@@ -68,6 +91,14 @@ void record_grade() {
     cout << "Enter assignment grade: ";
     float grade;
     cin >> grade;
+
+    // Input validation for the grade
+    while (cin.fail() || grade < 0 || grade > 100) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid grade. Please enter a grade between 0 and 100: ";
+        cin >> grade;
+    }
 
     new_record.assignment_grades.push_back(grade);
     grade_records.push_back(new_record);

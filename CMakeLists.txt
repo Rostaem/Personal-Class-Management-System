@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 26)
 
 add_executable(Personal_Class_Management_System
         main.cpp
-        schedule_management.cpp
-        attendance_tracker.cpp
-        grade_tracker.cpp
-        main_menu_display.cpp
+        utils/schedule_management.cpp
+        utils/attendance_tracker.cpp
+        utils/grade_tracker.cpp
+        utils/main_menu_display.cpp
 )
