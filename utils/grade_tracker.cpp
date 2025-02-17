@@ -5,17 +5,18 @@
 #include <iomanip> // For centering the title
 #include "grade_tracker.h"
 
+#include "schedule_management.h"
+
 using namespace std;
 const int WIDTH = 50;
 struct Grade {
-    string class_name;
+    string course_name;
     vector<float> assignment_grades;
 };
 
 vector<Grade> grade_records;
 
 void print_title(const string &title) {
-
     cout << string((WIDTH - title.length()) / 2, ' ') << title << endl;
 }
 
@@ -30,7 +31,6 @@ void manage_grades() {
         cout << "Enter your choice: ";
 
         cin >> choice;
-
 
         while (cin.fail() || choice < 1 || choice > 4) {
             cin.clear();
@@ -59,17 +59,16 @@ void manage_grades() {
 }
 
 void record_grade() {
-    string class_name;
-    cout << "Enter class name: ";
+    string course_name;
+    cout << "Enter course name: ";
     cin.ignore();
-    getline(cin, class_name);
+    getline(cin, course_name);
 
     for (auto &record : grade_records) {
-        if (record.class_name == class_name) {
+        if (record.course_name == course_name) {
             float grade;
             cout << "Enter assignment grade (0 - 100): "; // in the future implement letter grade conversion
             cin >> grade;
-
 
             while (cin.fail() || grade < 0 || grade > 100) {
                 cin.clear();
@@ -84,15 +83,13 @@ void record_grade() {
         }
     }
 
-
     Grade new_record;
-    new_record.class_name = class_name;
+    new_record.course_name = course_name;
 
     cout << "Enter assignment grade: ";
     float grade;
     cin >> grade;
 
-    // Input validation for the grade
     while (cin.fail() || grade < 0 || grade > 100) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max());
@@ -107,15 +104,15 @@ void record_grade() {
 }
 
 void calculate_grades() {
-    string class_name;
-    cout << "Enter class name: ";
+    string course_name;
+    cout << "Enter course name: ";
     cin.ignore();
-    getline(cin, class_name);
+    getline(cin, course_name);
 
     for (const auto &record : grade_records) {
-        if (record.class_name == class_name) {
+        if (record.course_name == course_name) {
             if (record.assignment_grades.empty()) {
-                cout << "No grades recorded for " << class_name << "." << endl;
+                cout << "No grades recorded for " << course_name << "." << endl;
                 return;
             }
 
@@ -125,12 +122,12 @@ void calculate_grades() {
             }
 
             float average = total / record.assignment_grades.size();
-            cout << "Average grade for " << class_name << ": " << average << endl;
+            cout << "Average grade for " << course_name << ": " << average << endl;
             return;
         }
     }
 
-    cout << "Class not found in grade records." << endl;
+    cout << "Course not found in grade records." << endl;
 }
 
 void display_grades() {
@@ -141,7 +138,7 @@ void display_grades() {
 
     cout << "\n=== Grade Records ===" << endl;
     for (const auto &record : grade_records) {
-        cout << "Class: " << record.class_name << ", Grades: ";
+        cout << "Course: " << record.course_name << ", Grades: ";
         for (float grade : record.assignment_grades) {
             cout << grade << " ";
         }
@@ -157,7 +154,7 @@ void save_grades() {
     }
 
     for (const auto &record : grade_records) {
-        file << record.class_name;
+        file << record.course_name;
         for (float grade : record.assignment_grades) {
             file << "," << grade;
         }
@@ -182,7 +179,7 @@ void load_grades() {
         size_t pos = 0;
         size_t next_pos = line.find(',');
 
-        record.class_name = line.substr(0, next_pos);
+        record.course_name = line.substr(0, next_pos);
         pos = next_pos + 1;
 
         while ((next_pos = line.find(',', pos)) != string::npos) {

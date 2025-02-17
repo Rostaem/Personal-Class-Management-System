@@ -5,24 +5,21 @@
 #include <string>
 using namespace std;
 
-// Define the Class structure
-struct Class {
+struct course {
 	string name;
 	string time;
 	string professor;
 	float grade;
 };
 
-// Declare the global classes vector
-extern vector<Class> classes;
+extern vector<course> courses;
 
-// Function declarations
 void manage_schedule();
-void add_class();
-void delete_class();
-void edit_class();
-void view_classes();
-void save_classes();
-void load_classes();
+void add_course();
+void delete_course();
+void edit_course();
+void view_courses();
+void save_courses();
+void load_courses();
 
 #endif // SCHEDULE_MANAGEMENT_H
