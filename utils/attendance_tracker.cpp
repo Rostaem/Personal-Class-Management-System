@@ -34,7 +34,7 @@ void track_attendance() {
 
         if (cin.fail()) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max());
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input, please enter a number between 1 and 4. " << endl;
             continue;
         }

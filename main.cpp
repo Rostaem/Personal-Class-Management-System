@@ -15,7 +15,7 @@ namespace fs = filesystem;
 int main() {
 
     // Load previously saved data for classes, attendance, and grades
-    load_courses();
+    load_courses(); //functions defined in other files
     load_attendance();
     load_grades();
 
@@ -33,7 +33,7 @@ int main() {
         // Input validation 1: Check if the input is a valid integer
         if (cin.fail()) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max());
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
             cout << "Invalid input. Please enter a number between 1 and 4." << endl;
             continue; // Restart the loop
         }

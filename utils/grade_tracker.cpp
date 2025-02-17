@@ -34,7 +34,7 @@ void manage_grades() {
 
         while (cin.fail() || choice < 1 || choice > 4) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max());
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a choice between 1 and 4: ";
             cin >> choice;
         }
@@ -92,7 +92,7 @@ void record_grade() {
 
     while (cin.fail() || grade < 0 || grade > 100) {
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max());
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Invalid grade. Please enter a grade between 0 and 100: ";
         cin >> grade;
     }
