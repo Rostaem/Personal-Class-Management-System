@@ -9,4 +9,5 @@ add_executable(Personal_Class_Management_System
         utils/attendance_tracker.cpp
         utils/grade_tracker.cpp
         utils/main_menu_display.cpp
+        utils/ensure_data_directory.cpp
 )
