@@ -22,7 +22,7 @@ void print_title(const string &title) {
 void manage_grades() {
     int choice;
     do {
-        print_title("=== Grade Tracker ===");
+        print_title("=== Grade Tracker ==="); // improve formatting
         cout << "1. Record Assignment Grade" << endl;
         cout << "2. Calculate Average Grade" << endl;
         cout << "3. Display Grades" << endl;
@@ -34,7 +34,7 @@ void manage_grades() {
 
         while (cin.fail() || choice < 1 || choice > 4) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cin.ignore(numeric_limits<streamsize>::max());
             cout << "Invalid input. Please enter a choice between 1 and 4: ";
             cin >> choice;
         }
@@ -67,10 +67,10 @@ void record_grade() {
     for (auto &record : grade_records) {
         if (record.class_name == class_name) {
             float grade;
-            cout << "Enter assignment grade: ";
+            cout << "Enter assignment grade (0 - 100): "; // in the future implement letter grade conversion
             cin >> grade;
 
-            // Input validation for the grade
+
             while (cin.fail() || grade < 0 || grade > 100) {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -84,7 +84,7 @@ void record_grade() {
         }
     }
 
-    // If class doesn't exist, create a new grade record
+
     Grade new_record;
     new_record.class_name = class_name;
 
@@ -95,7 +95,7 @@ void record_grade() {
     // Input validation for the grade
     while (cin.fail() || grade < 0 || grade > 100) {
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max());
         cout << "Invalid grade. Please enter a grade between 0 and 100: ";
         cin >> grade;
     }

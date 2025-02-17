@@ -4,7 +4,9 @@
 #include <string>
 #include <fstream>
 #include "attendance_tracker.h"
-#define WIDTH 60
+#include "schedule_management.h"
+
+#define WIDTH 50
 // Purpose : Manages attendance.
 using namespace std;
 
@@ -66,11 +68,41 @@ void mark_attendance() {
     cin.ignore();
     getline(cin, class_name);
 
+    // Check if the class exists in the schedule
+    bool class_found_in_schedule = false;
+    for (const auto &cls : classes) {
+        if (cls.name == class_name) {
+            class_found_in_schedule = true;
+            break;
+        }
+    }
+
+    // If class doesn't exist in the schedule
+    if (!class_found_in_schedule) {
+        cout << "Class '" << class_name << "' doesn't exist in the schedule." << endl;
+        cout << "Please add the class to the schedule first, then track attendance." << endl;
+        return; // Return to the attendance menu
+    }
+
+
     for (auto &record : attendance_records) {
         if (record.class_name == class_name) {
             int attended;
-            cout << "Enter 1 if attended, 0 if absent: ";
-            cin >> attended;
+
+
+            while (true) {
+                cout << "Enter 1 if attended, 0 if absent: ";
+                cin >> attended;
+
+                if (cin.fail() || (attended != 0 && attended != 1)) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid input. Please enter 0 or 1." << endl;
+                } else {
+                    break;
+                }
+            }
+
 
             record.total_classes++;
             if (attended == 1) {
@@ -82,18 +114,29 @@ void mark_attendance() {
         }
     }
 
-    // If class doesn't exist, create a new attendance record
+
     Attendance new_record;
     new_record.class_name = class_name;
     new_record.total_classes = 1;
 
-    cout << "Enter 1 if attended, 0 if absent: ";
     int attended;
-    cin >> attended;
 
-    new_record.attended_classes = attended == 1 ? 1 : 0;
+    while (true) {
+        cout << "Enter 1 if attended, 0 if absent: ";
+        cin >> attended;
 
+        if (cin.fail() || (attended != 0 && attended != 1)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter 0 or 1." << endl;
+        } else {
+            break;
+        }
+    }
+
+    new_record.attended_classes = (attended == 1) ? 1 : 0;
     attendance_records.push_back(new_record);
+
     cout << "Attendance marked successfully!" << endl;
 }
 

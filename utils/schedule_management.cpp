@@ -10,13 +10,7 @@
 
 using namespace std;
 
-struct Class {
-    string name;
-    string time;
-    string professor;
-    float grade;
-};
-
+// `classes` global vector
 vector<Class> classes;
 
 // Purpose: Manage the schedule
@@ -27,8 +21,7 @@ void manage_schedule() {
         int centering = (WIDTH - title.length()) / 2;
         cout << "\n" << setfill('=') << setw(centering) << ""
              << title
-             << setfill('=') << setw(WIDTH - title.length() - centering) << ""
-             << endl;
+             << setfill('=') << setw(WIDTH - title.length() - centering) << "" << endl;
 
         cout << "1. Add Class" << endl;
         cout << "2. Delete Class" << endl;
@@ -41,18 +34,18 @@ void manage_schedule() {
 
         // Input validation
         if (cin.fail()) {
-            cin.clear(); // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a number between 1 and 5." << endl;
-            continue; // Re-prompt the user
+            continue;
         }
 
         if (choice < 1 || choice > 5) {
             cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
-            continue; // Re-prompt the user
+            continue;
         }
 
-        // Handle valid input
+
         switch (choice) {
             case 1:
                 add_class();
@@ -76,8 +69,8 @@ void manage_schedule() {
 // Purpose: Add a new class
 void add_class() {
     Class new_class;
-    cout << "Enter class name: ";
     cin.ignore();
+    cout << "Enter class name: ";
     getline(cin, new_class.name);
 
     if (new_class.name.empty()) {
@@ -85,8 +78,9 @@ void add_class() {
         return;
     }
 
-    cout << "Enter class time: ";
+    cout << "Enter class time (e.g., 9:00 AM): ";
     getline(cin, new_class.time);
+
     cout << "Enter professor's name: ";
     getline(cin, new_class.professor);
 
@@ -99,8 +93,8 @@ void add_class() {
 // Purpose: Delete a class
 void delete_class() {
     string class_name;
-    cout << "Enter the name of the class to delete: ";
     cin.ignore();
+    cout << "Enter the name of the class to delete: ";
     getline(cin, class_name);
 
     for (auto it = classes.begin(); it != classes.end(); ++it) {
@@ -117,23 +111,26 @@ void delete_class() {
 // Purpose: Edit a class
 void edit_class() {
     string class_name;
-    cout << "Enter the name of the class to edit: ";
     cin.ignore();
+    cout << "Enter the name of the class to edit: ";
     getline(cin, class_name);
 
     for (auto &cls : classes) {
         if (cls.name == class_name) {
             cout << "Editing class: " << cls.name << endl;
-            cout << "Enter new class time: ";
+
+            cout << "Enter new class time (current: " << cls.time << "): ";
             getline(cin, cls.time);
-            cout << "Enter new professor's name: ";
+
+            cout << "Enter new professor's name (current: " << cls.professor << "): ";
             getline(cin, cls.professor);
+
             cout << "Class updated successfully!" << endl;
             return;
         }
     }
 
-    cout << "Class not found." << endl;
+    cout << "Class not found. Returning to menu." << endl;
 }
 
 // Purpose: View all classes
@@ -143,19 +140,34 @@ void view_classes() {
         return;
     }
 
-    cout << "\n=== Class Schedule ===" << endl;
+    string header = "=== Class Schedule ===";
+    int header_centering = (WIDTH - header.length()) / 2;
+    cout << "\n" << setw(header_centering) << "" << header << endl;
+
+    // Table headers
+    cout << setfill('-') << setw(WIDTH) << "" << endl;
+    cout << setfill(' ') << left
+         << setw(20) << "Name"
+         << setw(15) << "Time"
+         << setw(15) << "Professor" << endl;
+    cout << setfill('-') << setw(WIDTH) << "" << endl;
+
+    // Table rows
     for (const auto &cls : classes) {
-        cout << "Name: " << cls.name
-             << ", Time: " << cls.time
-             << ", Professor: " << cls.professor << endl;
+        cout << setfill(' ') << left
+             << setw(20) << cls.name
+             << setw(15) << cls.time
+             << setw(15) << cls.professor << endl;
     }
+
+    cout << setfill('-') << setw(WIDTH) << "" << endl;
 }
 
 // Purpose: Save classes to a file
 void save_classes() {
     ofstream file("data/classes_data.txt");
     if (!file) {
-        cout << "Error saving class data." << endl;
+        cout << "Error: Unable to save class data." << endl;
         return;
     }
 
@@ -164,7 +176,7 @@ void save_classes() {
     }
 
     file.close();
-    cout << "Classes saved successfully." << endl;
+    cout << "Classes saved successfully!" << endl;
 }
 
 // Purpose: Load classes from a file
@@ -183,14 +195,25 @@ void load_classes() {
         size_t pos2 = line.find(',', pos1 + 1);
         size_t pos3 = line.find(',', pos2 + 1);
 
+        if (pos1 == string::npos || pos2 == string::npos || pos3 == string::npos) {
+            cout << "Error: Malformed line in file. Skipping..." << endl;
+            continue;
+        }
+
         cls.name = line.substr(0, pos1);
         cls.time = line.substr(pos1 + 1, pos2 - pos1 - 1);
         cls.professor = line.substr(pos2 + 1, pos3 - pos2 - 1);
-        cls.grade = stof(line.substr(pos3 + 1));
+
+        try {
+            cls.grade = stof(line.substr(pos3 + 1));
+        } catch (const invalid_argument &) {
+            cout << "Error: Invalid grade format. Skipping..." << endl;
+            continue;
+        }
 
         classes.push_back(cls);
     }
 
     file.close();
-    cout << "Classes loaded successfully." << endl;
+    cout << "Classes loaded successfully!" << endl;
 }
