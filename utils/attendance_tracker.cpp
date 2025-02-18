@@ -10,7 +10,7 @@
 // Purpose : Manages attendance.
 using namespace std;
 
-struct Attendance {
+struct Attendance { //local struct
     string course_name;
     int total_courses;
     int attended_courses;
@@ -149,7 +149,7 @@ void calculate_attendance() {
                 return;
             }
 
-            float percentage = (static_cast<float>(record.attended_courses) / record.total_courses) * 100;
+            float percentage = (static_cast<float>(record.attended_courses) / record.total_courses) * 100; //static casting reqs
             cout << "Attendance percentage for " << course_name << ": " << percentage << "%" << endl;
             return;
         }

@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <iomanip> // For centering the title
+#include <iomanip>
 #include "grade_tracker.h"
 
 #include "schedule_management.h"
@@ -15,7 +15,7 @@ struct Grade {
 };
 
 vector<Grade> grade_records;
-
+//a different way to format
 void print_title(const string &title) {
     cout << string((WIDTH - title.length()) / 2, ' ') << title << endl;
 }
@@ -103,7 +103,7 @@ void record_grade() {
     cout << "Grade recorded successfully!" << endl;
 }
 
-void calculate_grades() {
+void calculate_grades() { //talk about thus function
     string course_name;
     cout << "Enter course name: ";
     cin.ignore();

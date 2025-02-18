@@ -29,19 +29,19 @@ void manage_schedule() {
         cout << "Enter your choice (1-5): ";
 
         cin >> choice;
-
+//intput validation 1: check if string
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a number between 1 and 5." << endl;
             continue;
         }
-
+//input validation 2: check int (1-4)
         if (choice < 1 || choice > 5) {
             cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
             continue;
         }
-
+// handling user input the same way to navigate through the menu
         switch (choice) {
             case 1:
                 add_course();
@@ -63,12 +63,12 @@ void manage_schedule() {
 }
 
 void add_course() {
-    course new_course;
+    course new_course; // declares a variable named new_course of type course
     cin.ignore();
     cout << "Enter course name: ";
     getline(cin, new_course.name);
 
-    if (new_course.name.empty()) {
+    if (new_course.name.empty()) { // edge case
         cout << "Course name cannot be empty. Please try again." << endl;
         return;
     }
@@ -91,9 +91,9 @@ void delete_course() {
     cout << "Enter the name of the course to delete: ";
     getline(cin, course_name);
 
-    for (auto it = courses.begin(); it != courses.end(); ++it) {
-        if (it->name == course_name) {
-            courses.erase(it);
+    for (auto it = courses.begin(); it != courses.end(); ++it) { // for loop that iterates through a list of courses to find and delete a course by its name
+        if (it->name == course_name) { // Checks if the name field of the course object (pointed to by the iterator it) matches the course_name provided by the user
+            courses.erase(it); //Removes the course object from the courses container at the position pointed to by the iterator it.
             cout << "Course deleted successfully!" << endl;
             return;
         }
@@ -109,7 +109,7 @@ void edit_course() {
     getline(cin, course_name);
 
     for (auto &cls : courses) {
-        if (cls.name == course_name) {
+        if (cls.name == course_name) { // Checks if the name of the current course (cls.name) matches the course_name entered by the user.
             cout << "Editing course: " << cls.name << endl;
 
             cout << "Enter new course time (current: " << cls.time << "): ";
@@ -131,7 +131,7 @@ void view_courses() {
         cout << "No courses available." << endl;
         return;
     }
-
+//display the table
     string header = "=== Course Schedule ===";
     int header_centering = (WIDTH - header.length()) / 2;
     cout << "\n" << setw(header_centering) << "" << header << endl;
