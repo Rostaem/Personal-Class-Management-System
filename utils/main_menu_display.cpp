@@ -37,19 +37,18 @@ void main_menu_display() {
 
 	// Display each option in a left-aligned box
 	for (const string &option : menu_options) {
-		int option_padding = (BOX_WIDTH - option.length()) / 2;
-
 		// Top border of the box
 		cout << "|" << setfill('-') << setw(BOX_WIDTH) << "-" << "|" << endl;
 
-		// Content of the box
-		cout << "|" << setfill(' ') << setw(option_padding + option.length()) << option
-			 << setw(BOX_WIDTH - option_padding - option.length()) << "  |" << endl;
+
+		int option_padding = (BOX_WIDTH - option.length()) / 2;
+		cout << "|" << setfill(' ')
+			 << setw(option_padding) << "" << option
+			 << setw(BOX_WIDTH - option_padding - option.length()) << "" << "|" << endl;
 
 		// Bottom border of the box
 		cout << "|" << setfill('-') << setw(BOX_WIDTH) << "-" << "|" << endl;
 	}
 
-	// Input prompt
 	cout << "Enter your choice: ";
 }
