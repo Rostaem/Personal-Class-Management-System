@@ -7,8 +7,8 @@
 #include "include/schedule_management.h"
 #include "include/attendance_tracker.h"
 #include "include/grade_tracker.h"
-#include "utils/ensure_data_directory.h"
-#include "utils/utils.h"
+#include "src/utils/ensure_data_directory.h"
+#include "src/utils/utils.h"
 
 using namespace std;
 namespace fs = filesystem;

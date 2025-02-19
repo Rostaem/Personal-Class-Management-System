@@ -15,6 +15,6 @@ add_executable(Personal_Class_Management_System
 
 
         #utils
-        utils/ensure_data_directory.cpp
-        utils/utils.cpp
+        src/utils/ensure_data_directory.cpp
+        src/utils/utils.cpp
 )
