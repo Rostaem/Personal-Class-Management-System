@@ -14,60 +14,50 @@ using namespace std;
 namespace fs = filesystem;
 
 int main() {
-    // Load previously saved data for classes, attendance, and grades
-    ensure_data_directory();
-    load_courses();
-    load_attendance();
-    load_grades();
-    while (true) {
-        // Define menu options for the main menu
-       main_menu_display();
+	// Ensure the data directory exists and load previously saved data for courses, attendance, and grades
+	ensure_data_directory();
+	load_courses();
+	load_attendance();
+	load_grades();
 
-        // Input validation: Get user choice as an integer
-        int choice;
-        cin >> choice;
+	while (true) { // Main menu loop
+		main_menu_display();
 
-        if (cin.fail()) { // Check if input is invalid
-            cin.clear(); // Clear error flags
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
-            continue;
-        }
+		int choice = input_validation(1, 5, "Enter your choice (1-5): ");
+		if (choice == -1) { // Handle invalid input
+			cout << "Invalid input. Returning to menu..." << endl;
+			continue;
+		}
 
-        // Validate the menu choice is within the correct range
-        if (choice < 1 || choice > 4) {
-            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
-            continue;
-        }
+		switch (choice) {
+			case 1:
+				manage_schedule();
+			break;
 
-        // Handle user input based on their choice
-        switch (choice) {
-            case 1: // Schedule Management
-                manage_schedule();
-                break;
+			case 2:
+				track_attendance();
+			break;
 
-            case 2: // Attendance Management
-                track_attendance();
-                break;
+			case 3:
+				manage_grades();
+			break;
 
-            case 3: // Grade Management
-                manage_grades();
-                break;
+			case 4:
 
-            case 4: // Exit
-                cout << "Goodbye! Saving all data..." << endl;
+					cout << "Goodbye! Saving all data..." << endl;
 
-                // Save data for courses, attendance, and grades before exiting
-                save_courses();
-                save_attendance();
-                save_grades();
+			// Save data for courses, attendance, and grades before exiting
+			save_courses();
+			save_attendance();
+			save_grades();
 
-                return 0;
+			return 0;
 
-            default:
-                cout << "Invalid input. Please try again." << endl;
-        }
-    }
+			default:
+					cout << "Unexpected error. Returning to menu..." << endl;
+			break;
+		}
+	}
 
-    return 0;
+	return 0;
 }

@@ -26,3 +26,22 @@ void submenu_formatting(string submenu_title, string submenu_options[], int size
 		cout << "|" << setfill('-') << setw(BOXWIDTH) << "" << "|" << endl;
 	}
 }
+
+int input_validation(int min, int max, string prompt) {
+	int choice;
+
+	cout << prompt;
+	cin >> choice;
+
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		return -1;
+	}
+
+	if (choice < min || choice > max) {
+		return -1; // the -1 will let the other file know something went wrong
+	}
+
+	return choice;
+}

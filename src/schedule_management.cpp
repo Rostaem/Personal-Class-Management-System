@@ -12,9 +12,8 @@
 using namespace std;
 
 vector<course> courses;
-void manage_schedule() {
-    int choice;
 
+void manage_schedule() {
     string submenu_title = "Schedule Management";
     string submenu_options[] = {
         "1. Add Course",
@@ -25,21 +24,14 @@ void manage_schedule() {
     };
     int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
 
+    int choice;
     do {
         submenu_formatting(submenu_title, submenu_options, size);
 
-        cout << "Enter your choice (1-5): ";
-        cin >> choice;
+        choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a number between 1 and 5." << endl;
-            continue;
-        }
-
-        if (choice < 1 || choice > 5) {
-            cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
+        if (choice == -1) {
+            cout << "Invalid input, please enter a number betwwen 1 and 5. Returning to menu..." << endl;
             continue;
         }
 

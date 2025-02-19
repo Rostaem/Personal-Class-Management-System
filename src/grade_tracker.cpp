@@ -18,7 +18,6 @@ vector<Grade> grade_records;
 
 // Purpose: Displays the grade tracker menu and handles user input
 void manage_grades() {
-    int choice;
     string submenu_title = "Grade Tracker";
     string submenu_options[] = {
         "1. Record Assignment Grade",
@@ -27,22 +26,15 @@ void manage_grades() {
         "4. Back to Main Menu"
     };
     int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
+
+    int choice;
     do {
         submenu_formatting(submenu_title, submenu_options, size);
 
-        cout << "Enter your choice (1-4): ";
-        cin >> choice;
+        choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
-        // Input validation: Check for non-numeric input
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
-            continue;
-        }
-
-        if (choice < 1 || choice > 4) {
-            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
+        if (choice == -1) {
+            cout << "Invalid input, please enter a number betwwen 1 and 4. Returning to menu..." << endl;
             continue;
         }
 
