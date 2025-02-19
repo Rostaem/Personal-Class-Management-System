@@ -4,39 +4,46 @@
 #include <fstream>
 #include <iomanip>
 #include "grade_tracker.h"
-
 #include "schedule_management.h"
+#include "utils/utils.h"
 
 using namespace std;
-const int WIDTH = 50;
+
 struct Grade {
     string course_name;
     vector<float> assignment_grades;
 };
 
 vector<Grade> grade_records;
-//a different way to format
-void print_title(const string &title) {
-    cout << string((WIDTH - title.length()) / 2, ' ') << title << endl;
-}
 
+// Purpose: Displays the grade tracker menu and handles user input
 void manage_grades() {
     int choice;
+    string submenu_title = "Grade Tracker";
+    string submenu_options[] = {
+        "1. Record Assignment Grade",
+        "2. Calculate Average Grade",
+        "3. Display Grades",
+        "4. Back to Main Menu"
+    };
+    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
     do {
-        print_title("=== Grade Tracker ==="); // improve formatting
-        cout << "1. Record Assignment Grade" << endl;
-        cout << "2. Calculate Average Grade" << endl;
-        cout << "3. Display Grades" << endl;
-        cout << "4. Back to Main Menu" << endl;
-        cout << "Enter your choice: ";
+        submenu_formatting(submenu_title, submenu_options, size);
 
+        cout << "Enter your choice (1-4): ";
         cin >> choice;
 
-        while (cin.fail() || choice < 1 || choice > 4) {
+        // Input validation: Check for non-numeric input
+        if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a choice between 1 and 4: ";
-            cin >> choice;
+            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
+            continue;
+        }
+
+        if (choice < 1 || choice > 4) {
+            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
+            continue;
         }
 
         switch (choice) {

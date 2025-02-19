@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -5,12 +6,10 @@
 #include <fstream>
 #include "attendance_tracker.h"
 #include "schedule_management.h"
-
-#define WIDTH 50
-// Purpose : Manages attendance.
+#include "utils/utils.h"
 using namespace std;
 
-struct Attendance { //local struct
+struct Attendance {
     string course_name;
     int total_courses;
     int attended_courses;
@@ -18,29 +17,33 @@ struct Attendance { //local struct
 
 vector<Attendance> attendance_records;
 
-// Purpose : displays menu and handles user input.
+// Purpose: Displays the attendance tracker menu and handles user input
 void track_attendance() {
     int choice;
+    string submenu_title = "Attendance Tracker";
+    string submenu_options[] = {
+        "1. Track Attendance",
+        "2. Calculate Attendance Percentage",
+        "3. Display Attendance Records",
+        "4. Back to Main Menu"
+    };
+    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
+
     do {
-        string title = "Attendance Tracker";
-        int centering = (WIDTH - title.length()) / 2;
-        cout << setfill('=') << setw(centering) << "" << title << setfill('=') << setw(WIDTH - title.length() - centering) << "" << endl;
-        cout << "1. Track Attendance" << endl;
-        cout << "2. Calculate Attendance Percentage" << endl;
-        cout << "3. Display Attendance Records" << endl;
-        cout << "4. Back to Main Menu" << endl;
+        submenu_formatting(submenu_title, submenu_options, size);
+
         cout << "Enter your choice (1-4): ";
         cin >> choice;
 
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input, please enter a number between 1 and 4. " << endl;
+            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
             continue;
         }
 
         if (choice < 1 || choice > 4) {
-            cout << "Invalid Input. Enter a number between 1 and 4" << endl;
+            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
             continue;
         }
 

@@ -35,13 +35,13 @@ void main_menu_display() {
 		"4. Exit"
 	};
 
-	// Display each option in a left-aligned box
+	// box for menu options
 	for (const string &option : menu_options) {
 		// Top border of the box
 		cout << "|" << setfill('-') << setw(BOX_WIDTH) << "-" << "|" << endl;
 
 
-		int option_padding = (BOX_WIDTH - option.length()) / 2;
+		int option_padding = (BOX_WIDTH - option.length()) / 2; //centering
 		cout << "|" << setfill(' ')
 			 << setw(option_padding) << "" << option
 			 << setw(BOX_WIDTH - option_padding - option.length()) << "" << "|" << endl;

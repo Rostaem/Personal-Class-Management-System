@@ -5,59 +5,60 @@
 #include <iomanip>
 #include <limits>
 #include "schedule_management.h"
+#include "utils/utils.h"
 
 #define WIDTH 50
 
 using namespace std;
 
 vector<course> courses;
-
 void manage_schedule() {
     int choice;
+
+    string submenu_title = "Schedule Management";
+    string submenu_options[] = {
+        "1. Add Course",
+        "2. Delete Course",
+        "3. Edit Course",
+        "4. View Courses",
+        "5. Back to Main Menu"
+    };
+    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
+
     do {
-        string title = "Schedule Management";
-        int centering = (WIDTH - title.length()) / 2;
-        cout << endl << setfill('=') << setw(centering) << ""
-             << title
-             << setfill('=') << setw(WIDTH - title.length() - centering) << "" << endl;
+        submenu_formatting(submenu_title, submenu_options, size);
 
-        cout << "1. Add Course" << endl;
-        cout << "2. Delete Course" << endl;
-        cout << "3. Edit Course" << endl;
-        cout << "4. View Courses" << endl;
-        cout << "5. Back to Main Menu" << endl;
         cout << "Enter your choice (1-5): ";
-
         cin >> choice;
-//intput validation 1: check if string
+
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a number between 1 and 5." << endl;
             continue;
         }
-//input validation 2: check int (1-4)
+
         if (choice < 1 || choice > 5) {
             cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
             continue;
         }
-// handling user input the same way to navigate through the menu
+
         switch (choice) {
             case 1:
                 add_course();
-                break;
+            break;
             case 2:
                 delete_course();
-                break;
+            break;
             case 3:
                 edit_course();
-                break;
+            break;
             case 4:
                 view_courses();
-                break;
+            break;
             case 5:
                 cout << "Returning to Main Menu..." << endl;
-                break;
+            break;
         }
     } while (choice != 5);
 }
