@@ -36,6 +36,7 @@ cmake-build-debug/
 
 # Ignore JetBrains IDE project files
 .idea/
+.DS_Store
 
 # Ignore other build or temporary files
 *.log
