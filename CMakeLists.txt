@@ -3,7 +3,10 @@ project(Personal_Class_Management_System)
 
 
 set(CMAKE_CXX_STANDARD 23)
-include_directories(include)
+include_directories(
+        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/src/utils
+)
 add_executable(Personal_Class_Management_System
         main.cpp
 

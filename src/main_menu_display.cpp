@@ -1,6 +1,9 @@
 #include "main_menu_display.h"
+#include "schedule_management.h"
+#include "attendance_tracker.h"
+#include "grade_tracker.h"
 #include <iostream>
-#include <iomanip>
+
 
 using namespace std;
 
@@ -51,4 +54,29 @@ void main_menu_display() {
 	}
 
 	cout << "Enter your choice: ";
+}
+
+bool handle_main_menu_choice(int choice) {
+	switch (choice) {
+		case 1:
+			manage_schedule();
+		break;
+
+		case 2:
+			track_attendance();
+		break;
+
+		case 3:
+			manage_grades();
+		break;
+
+		case 4:
+
+			cout << "Goodbye! Saving all data..." << endl;
+
+                return false;
+        default:
+          cout << "invalid input, returnin to main menu..." << endl;
+}
+return true;
 }

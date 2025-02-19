@@ -5,5 +5,6 @@
 #include <iomanip>
 
 void main_menu_display();
+bool handle_main_menu_choice(int choice);
 
 #endif //MAIN_MENU_DISPLAY_H

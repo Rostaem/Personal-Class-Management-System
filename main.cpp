@@ -24,37 +24,13 @@ int main() {
 		main_menu_display();
 
 		int choice = input_validation(1, 5, "Enter your choice (1-5): ");
-		if (choice == -1) { // Handle invalid input
+		if (choice == -1) {
 			cout << "Invalid input. Returning to menu..." << endl;
 			continue;
 		}
 
-		switch (choice) {
-			case 1:
-				manage_schedule();
-			break;
 
-			case 2:
-				track_attendance();
-			break;
-
-			case 3:
-				manage_grades();
-			break;
-
-			case 4:
-
-					cout << "Goodbye! Saving all data..." << endl;
-
-			// Save data for courses, attendance, and grades before exiting
-			save_courses();
-			save_attendance();
-			save_grades();
-
-			return 0;
-
-			default:
-					cout << "Unexpected error. Returning to menu..." << endl;
+		if (!handle_main_menu_choice(choice)) {
 			break;
 		}
 	}
