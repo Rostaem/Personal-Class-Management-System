@@ -3,15 +3,15 @@ project(Personal_Class_Management_System)
 
 
 set(CMAKE_CXX_STANDARD 23)
-
+include_directories(include)
 add_executable(Personal_Class_Management_System
         main.cpp
 
         #features
-        features/schedule_management.cpp
-        features/attendance_tracker.cpp
-        features/grade_tracker.cpp
-        features/main_menu_display.cpp
+        src/schedule_management.cpp
+        src/attendance_tracker.cpp
+        src/grade_tracker.cpp
+        src/main_menu_display.cpp
 
 
         #utils
