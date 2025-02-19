@@ -3,10 +3,10 @@
 #include <limits>
 #include <fstream>
 #include <filesystem>
-#include "utils/main_menu_display.h"
-#include "utils/schedule_management.h"
-#include "utils/attendance_tracker.h"
-#include "utils/grade_tracker.h"
+#include "src/features//main_menu_display.h"
+#include "src/features/schedule_management.h"
+#include "src/features/attendance_tracker.h"
+#include "src/features/grade_tracker.h"
 #include "utils/ensure_data_directory.h"
 #include "utils/utils.h"
 

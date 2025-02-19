@@ -8,10 +8,11 @@ add_executable(Personal_Class_Management_System
         main.cpp
 
         #features
-        features/schedule_management.cpp
-        features/attendance_tracker.cpp
-        features/grade_tracker.cpp
-        features/main_menu_display.cpp
+        src/features/schedule_management.cpp
+        src/features/attendance_tracker.cpp
+        src/features/grade_tracker.cpp
+        src/features/main_menu_display.cpp
+        src/features/
 
         #utils
         utils/ensure_data_directory.cpp
