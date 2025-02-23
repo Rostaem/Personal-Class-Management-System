@@ -6,6 +6,7 @@
 #include "attendance_tracker.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
+#include "menu.h"
 using namespace std;
 
 struct Attendance {
@@ -18,39 +19,40 @@ vector<Attendance> attendance_records;
 
 // Purpose: Displays the attendance tracker menu and handles user input
 void track_attendance() {
+    Menu menu;
+
     string submenu_title = "Attendance Tracker";
-    string submenu_options[] = {
+    vector<string> submenu_options = {
         "1. Track Attendance",
         "2. Calculate Attendance Percentage",
         "3. Display Attendance Records",
         "4. Back to Main Menu"
     };
-    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
 
     int choice;
     do {
-        submenu_formatting(submenu_title, submenu_options, size);
+        menu.display_submenu(submenu_title, submenu_options);
 
-        choice = input_validation(1,5, "Enter your choice: (1-5): ");
+        choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         if (choice == -1) {
-            cout << "Invalid input, please enter a number betwwen 1 and 5. Returning to menu..." << endl;
+            cout << "Invalid input, please enter a number between 1 and 4. Returning to menu..." << endl;
             continue;
         }
 
         switch (choice) {
             case 1:
                 mark_attendance();
-                break;
+            break;
             case 2:
                 calculate_attendance();
-                break;
+            break;
             case 3:
                 display_attendance();
-                break;
+            break;
             case 4:
                 cout << "Returning to Main Menu." << endl;
-                break;
+            break;
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
@@ -63,7 +65,7 @@ void mark_attendance() {
     cin.ignore();
     getline(cin, course_name);
 
-    // Check if the course exists in the schedule
+    // Check if course exists in the schedule
     bool course_found_in_schedule = false;
     for (const auto &course : courses) {
         if (course.name == course_name) {

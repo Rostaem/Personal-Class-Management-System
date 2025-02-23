@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <limits>
 #include "schedule_management.h"
+#include "menu.h"
 #include "utils/utils.h"
 
 #define WIDTH 50
@@ -14,24 +15,25 @@ using namespace std;
 vector<course> courses;
 
 void manage_schedule() {
+    Menu menu;
+
     string submenu_title = "Schedule Management";
-    string submenu_options[] = {
+    vector<string> submenu_options = {
         "1. Add Course",
         "2. Delete Course",
         "3. Edit Course",
         "4. View Courses",
         "5. Back to Main Menu"
     };
-    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
 
     int choice;
     do {
-        submenu_formatting(submenu_title, submenu_options, size);
+        menu.display_submenu(submenu_title, submenu_options);
 
         choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
         if (choice == -1) {
-            cout << "Invalid input, please enter a number betwwen 1 and 5. Returning to menu..." << endl;
+            cout << "Invalid input, please enter a number between 1 and 5. Returning to menu..." << endl;
             continue;
         }
 
@@ -56,7 +58,7 @@ void manage_schedule() {
 }
 
 void add_course() {
-    course new_course; // declares a variable named new_course of type course
+    course new_course;
     cin.ignore();
     cout << "Enter course name: ";
     getline(cin, new_course.name);

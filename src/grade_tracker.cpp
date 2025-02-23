@@ -6,6 +6,7 @@
 #include "grade_tracker.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
+#include "menu.h"
 
 using namespace std;
 
@@ -18,39 +19,40 @@ vector<Grade> grade_records;
 
 // Purpose: Displays the grade tracker menu and handles user input
 void manage_grades() {
+    Menu menu;
+
     string submenu_title = "Grade Tracker";
-    string submenu_options[] = {
+    vector<string> submenu_options = {
         "1. Record Assignment Grade",
         "2. Calculate Average Grade",
         "3. Display Grades",
         "4. Back to Main Menu"
     };
-    int size = sizeof(submenu_options) / sizeof(submenu_options[0]);
 
     int choice;
     do {
-        submenu_formatting(submenu_title, submenu_options, size);
+        menu.display_submenu(submenu_title, submenu_options);
 
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         if (choice == -1) {
-            cout << "Invalid input, please enter a number betwwen 1 and 4. Returning to menu..." << endl;
+            cout << "Invalid input, please enter a number between 1 and 4. Returning to menu..." << endl;
             continue;
         }
 
         switch (choice) {
             case 1:
                 record_grade();
-                break;
+            break;
             case 2:
                 calculate_grades();
-                break;
+            break;
             case 3:
                 display_grades();
-                break;
+            break;
             case 4:
                 cout << "Returning to Main Menu." << endl;
-                break;
+            break;
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
@@ -135,7 +137,7 @@ void display_grades() {
         return;
     }
 
-    cout << "\n=== Grade Records ===" << endl;
+    cout << "\n=== Grade Records ===" << endl; //improve formatting
     for (const auto &record : grade_records) {
         cout << "Course: " << record.course_name << ", Grades: ";
         for (float grade : record.assignment_grades) {

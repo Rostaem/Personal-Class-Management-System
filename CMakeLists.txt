@@ -14,7 +14,7 @@ add_executable(Personal_Class_Management_System
         src/schedule_management.cpp
         src/attendance_tracker.cpp
         src/grade_tracker.cpp
-        src/main_menu_display.cpp
+        src/menu.cpp
 
 
         #utils
