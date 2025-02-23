@@ -18,6 +18,7 @@ struct Grade {
 vector<Grade> grade_records;
 
 // Purpose: Displays the grade tracker menu and handles user input
+
 void manage_grades() {
     Menu menu;
 
@@ -31,8 +32,7 @@ void manage_grades() {
 
     int choice;
     do {
-        menu.display_submenu(submenu_title, submenu_options);
-
+        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         if (choice == -1) {

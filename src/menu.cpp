@@ -8,12 +8,42 @@ using namespace std;
 
 Menu::Menu() {}
 
-// Display the main menu
+/*formatting borders and centered text helper function*/
+void Menu::format_box(const string& text, char border_char, int width) const {
+    cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
+
+    int padding = (width - text.length()) / 2;
+    cout << "|" << setfill(' ')
+         << setw(padding) << "" << text
+         << setw(width - padding - text.length()) << "" << "|" << endl;
+
+    cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
+}
+
+/* display any menu (used for submenus) */
+void Menu::display_menu(const string& title, const vector<string>& options) const {
+    // Top border
+    cout << setfill('=') << setw(WIDTH) << "=" << endl;
+
+    // Title
+    int padding = (WIDTH - title.length()) / 2;
+    cout << setfill(' ') << setw(padding + title.length()) << title
+         << setw(WIDTH - padding - title.length()) << "" << endl;
+
+    // Bottom border
+    cout << setfill('=') << setw(WIDTH) << "=" << endl;
+
+    // Display options in a box
+    for (const string& option : options) {
+        format_box(option, '-', BOX_WIDTH); // calling helper function at the top
+    }
+}
+
 void Menu::display_main_menu() const {
-    // top border
+    // Top border
     cout << setfill('*') << setw(WIDTH) << "" << endl;
 
-    // title
+    // Title
     string title = "Welcome to your Personal Course Management System!";
     int padding = (WIDTH - title.length()) / 2;
     cout << setfill(' ') << setw(padding + title.length()) << title
@@ -24,78 +54,25 @@ void Menu::display_main_menu() const {
     cout << setw(padding + subtitle.length()) << subtitle
          << setw(WIDTH - padding - subtitle.length()) << "" << endl;
 
-    // bottom border
+    // Bottom border
     cout << setfill('*') << setw(WIDTH) << "" << endl;
 
-    vector<string> menu_options = {
+    // Main menu options
+    vector<string> main_menu_options = {
         "1. Schedule",
         "2. Attendance",
         "3. Record & View Grades",
         "4. Exit"
     };
 
-    // box for menu options
-    for (const string& option : menu_options) {
-        // Top border
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "-" << "|" << endl;
-
-        // Centered
-        int option_padding = (BOX_WIDTH - option.length()) / 2;
-        cout << "|" << setfill(' ')
-             << setw(option_padding) << "" << option
-             << setw(BOX_WIDTH - option_padding - option.length()) << "" << "|" << endl;
-
-        // Bottom border
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "-" << "|" << endl;
+    for (const string& option : main_menu_options) {
+        format_box(option, '-', BOX_WIDTH); // using helper function for boxes
     }
 
     cout << "Enter your choice: ";
 }
 
-void Menu::submenu_formatting(const string& submenu_title, const vector<string>& submenu_options) const {
-    cout << setfill('=') << setw(WIDTH) << "=" << endl;
-
-    int padding = (WIDTH - submenu_title.length()) / 2;
-    cout << setfill(' ') << setw(padding + submenu_title.length()) << submenu_title
-         << setw(WIDTH - padding - submenu_title.length()) << "" << endl;
-
-    cout << setfill('=') << setw(WIDTH) << "=" << endl;
-
-    for (const string& option : submenu_options) {
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "" << "|" << endl;
-
-        int option_padding = (BOX_WIDTH - option.length()) / 2;
-        cout << "|" << setfill(' ')
-             << setw(option_padding) << "" << option
-             << setw(BOX_WIDTH - option_padding - option.length()) << "" << "|" << endl;
-
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "" << "|" << endl;
-    }
-}
-
-void Menu::display_submenu(const string& submenu_title, const vector<string>& submenu_options) const {
-    cout << setfill('=') << setw(WIDTH) << " " << endl;
-
-    int padding = (WIDTH - submenu_title.length()) / 2;
-    cout << setfill(' ') << setw(padding + submenu_title.length()) << submenu_title
-         << setw(WIDTH - padding - submenu_title.length()) << "" << endl;
-
-    cout << setfill('=') << setw(WIDTH) << " " << endl;
-
-    // options
-    for (const string& option : submenu_options) {
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "" << "|" << endl;
-
-        int option_padding = (BOX_WIDTH - option.length()) / 2;
-        cout << "|" << setfill(' ')
-             << setw(option_padding) << "" << option
-             << setw(BOX_WIDTH - option_padding - option.length()) << "" << "|" << endl;
-
-        cout << "|" << setfill('-') << setw(BOX_WIDTH) << "" << "|" << endl;
-    }
-}
-
-//input handling
+// Handle main menu choice
 bool Menu::handle_main_menu_choice(int choice) const {
     switch (choice) {
         case 1:

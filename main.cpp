@@ -23,17 +23,14 @@ int main() {
 	Menu menu;
 
 	while (true) {
-		// Display the main menu
 		menu.display_main_menu();
 
-		// Get the user's input
 		int choice = input_validation(1, 4, "Enter your choice (1-4): ");
 		if (choice == -1) {
 			cout << "Invalid input. Returning to menu..." << endl;
 			continue;
 		}
 
-		// Handle the user's choice and exit if needed
 		if (!menu.handle_main_menu_choice(choice)) {
 			break;
 		}

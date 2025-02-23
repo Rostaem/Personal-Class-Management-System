@@ -28,8 +28,7 @@ void manage_schedule() {
 
     int choice;
     do {
-        menu.display_submenu(submenu_title, submenu_options);
-
+        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
         choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
         if (choice == -1) {
