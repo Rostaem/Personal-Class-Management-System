@@ -1,9 +1,5 @@
 #include "utils.h"
 
-const int WIDTH = 60;
-const int BOXWIDTH = 40;
-
-
 int input_validation(int min, int max, string prompt) {
 	int choice;
 

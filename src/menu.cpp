@@ -10,7 +10,8 @@ Menu::Menu() {}
 
 /*formatting borders and centered text helper function*/
 void Menu::format_box(const string& text, char border_char, int width) const {
-    cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
+
+  cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
 
     int padding = (width - text.length()) / 2;
     cout << "|" << setfill(' ')
@@ -89,6 +90,8 @@ bool Menu::handle_main_menu_choice(int choice) const {
 
         case 4:
             cout << "Goodbye! Saving all data..." << endl;
+            save_courses();
+            save_grades();
             return false;
 
         default:
