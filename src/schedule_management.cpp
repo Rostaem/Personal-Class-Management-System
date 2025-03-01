@@ -147,7 +147,7 @@ void view_courses() {
     cout << setfill('-') << setw(WIDTH) << "" << endl;
 }
 
-void save_courses() {
+void save_courses() { // never being caled, fix
     ofstream file("data/courses_data.txt");
     if (!file) {
         cout << "Error: Unable to save course data." << endl;
