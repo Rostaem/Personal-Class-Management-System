@@ -70,7 +70,6 @@ void Menu::display_main_menu() const {
         format_box(option, '-', BOX_WIDTH); // using helper function for boxes
     }
 
-    cout << "Enter your choice: ";
 }
 
 // Handle main menu choice
