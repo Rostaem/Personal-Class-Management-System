@@ -29,17 +29,12 @@ void manage_schedule() {
     int choice;
     do {
         menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
-        choice = input_validation(1, 5, "Enter your choice (1-5): ");
-
-        if (choice == -1) {
-            cout << "Invalid input, please enter a number between 1 and 5. Returning to menu..." << endl;
-            continue;
-        }
+        choice = input_validation(1, 5, "Enter your choice (1-5): "); // look closely here
 
         switch (choice) {
             case 1:
                 // Error here
-                add_course();
+                add_course(); // take a look inside this function
             break;
             case 2:
                 delete_course();
@@ -59,8 +54,8 @@ void manage_schedule() {
 
 void add_course() {
     course new_course;
-    cin.ignore();
     cout << "Enter course name: ";
+     cin.ignore();
     getline(cin, new_course.name);
 
     if (new_course.name.empty()) { // edge case
