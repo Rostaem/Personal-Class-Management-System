@@ -35,11 +35,6 @@ void manage_grades() {
         menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
-        if (choice == -1) {
-            cout << "Invalid input, please enter a number between 1 and 4. Returning to menu..." << endl;
-            continue;
-        }
-
         switch (choice) {
             case 1:
                 record_grade();
