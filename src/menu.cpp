@@ -89,7 +89,7 @@ bool Menu::handle_main_menu_choice(int choice) const {
 
         case 4:
             cout << "Goodbye! Saving all data..." << endl;
-            save_courses();
+            save_courses(); // calling functions to save data to file (data)
             save_grades();
             return false;
 

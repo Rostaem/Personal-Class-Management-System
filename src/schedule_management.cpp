@@ -38,6 +38,7 @@ void manage_schedule() {
 
         switch (choice) {
             case 1:
+                // Error here
                 add_course();
             break;
             case 2:
