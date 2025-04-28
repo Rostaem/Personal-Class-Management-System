@@ -16,8 +16,8 @@ vector<course> courses;
 
 void manage_schedule() {
     Menu menu;
-
-    string submenu_title = "Schedule Management";
+// thsi is supposed to call submenu in menu class
+    string submenu_title = "Schedule Management1";
     vector<string> submenu_options = {
         "1. Add Course",
         "2. Delete Course",
@@ -28,13 +28,12 @@ void manage_schedule() {
 
     int choice;
     do {
-        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
+        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu...it's supposed to uyse submenui
         choice = input_validation(1, 5, "Enter your choice (1-5): "); // look closely here
 
         switch (choice) {
             case 1:
-                // Error here
-                add_course(); // take a look inside this function
+                add_course();
             break;
             case 2:
                 delete_course();
@@ -58,7 +57,7 @@ void add_course() {
      cin.ignore();
     getline(cin, new_course.name);
 
-    if (new_course.name.empty()) { // edge case
+    if (new_course.name.empty()) {
         cout << "Course name cannot be empty. Please try again." << endl;
         return;
     }
@@ -121,10 +120,10 @@ void view_courses() {
         cout << "No courses available." << endl;
         return;
     }
-//display the table
-    string header = "=== Course Schedule ===";
+//display the table, consider making a helper function down the line
+    string header = "Course Schedule";
     int header_centering = (WIDTH - header.length()) / 2;
-    cout << "\n" << setw(header_centering) << "" << header << endl;
+    cout << endl << setfill(' ') << setw(header_centering) << "" << header << endl;
 
     cout << setfill('-') << setw(WIDTH) << "" << endl;
     cout << setfill(' ') << left
@@ -139,7 +138,7 @@ void view_courses() {
              << setw(15) << cls.time
              << setw(15) << cls.professor << endl;
     }
-
+//bottom line
     cout << setfill('-') << setw(WIDTH) << "" << endl;
 }
 
