@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <memory>
 #include "schedule_management.h"
 #include "menu.h"
 #include "utils/utils.h"
@@ -12,12 +13,12 @@
 
 using namespace std;
 
-vector<course> courses;
+vector<shared_ptr<course>> courses;
 
 void manage_schedule() {
     Menu menu;
-// thsi is supposed to call submenu in menu class
-    string submenu_title = "Schedule Management1";
+// this is what gets sent to submenu
+    string submenu_title = "Schedule Management";
     vector<string> submenu_options = {
         "1. Add Course",
         "2. Delete Course",
@@ -27,11 +28,11 @@ void manage_schedule() {
     };
 
     int choice;
-    do {
-        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu...it's supposed to uyse submenui
-        choice = input_validation(1, 5, "Enter your choice (1-5): "); // look closely here
+    do { // do while loop for showing this submenu repeatedly
+        menu.display_menu(submenu_title, submenu_options);
+        choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
-        switch (choice) {
+        switch (choice) { //modular design : different functions
             case 1:
                 add_course();
             break;
@@ -52,23 +53,24 @@ void manage_schedule() {
 }
 
 void add_course() {
-    course new_course;
+    auto new_course = make_shared<course>(); //shared ptr
+
     cout << "Enter course name: ";
      cin.ignore();
-    getline(cin, new_course.name);
+    getline(cin, new_course->name);
 
-    if (new_course.name.empty()) {
+    if (new_course->name.empty()) {
         cout << "Course name cannot be empty. Please try again." << endl;
         return;
     }
 
     cout << "Enter course time (ex 9:00 AM): ";
-    getline(cin, new_course.time);
+    getline(cin, new_course->time);
 
     cout << "Enter professor's name: ";
-    getline(cin, new_course.professor);
+    getline(cin, new_course->professor);
 
-    new_course.grade = 0.0;
+    new_course->grade = 0.0;
     courses.push_back(new_course);
 
     cout << "Course added successfully!" << endl;
@@ -81,7 +83,7 @@ void delete_course() {
     getline(cin, course_name);
 
     for (auto it = courses.begin(); it != courses.end(); ++it) { // for loop that iterates through a list of courses to find and delete a course by its name
-        if (it->name == course_name) { // Checks if the name field of the course object (pointed to by the iterator it) matches the course_name provided by the user
+        if ((*it)->name == course_name) { // dereference shared_ptr
             courses.erase(it); //Removes the course object from the courses container at the position pointed to by the iterator it.
             cout << "Course deleted successfully!" << endl;
             return;
@@ -98,14 +100,14 @@ void edit_course() {
     getline(cin, course_name);
 
     for (auto &cls : courses) {
-        if (cls.name == course_name) { // Checks if the name of the current course (cls.name) matches the course_name entered by the user.
-            cout << "Editing course: " << cls.name << endl;
+        if (cls->name == course_name) { // Checks if the name of the current course (cls.name) matches the course_name entered by the user.
+            cout << "Editing course: " << cls->name << endl;
 
-            cout << "Enter new course time (current: " << cls.time << "): ";
-            getline(cin, cls.time);
+            cout << "Enter new course time (current: " << cls->time << "): ";
+            getline(cin, cls->time);
 
-            cout << "Enter new professor's name (current: " << cls.professor << "): ";
-            getline(cin, cls.professor);
+            cout << "Enter new professor's name (current: " << cls->professor << "): ";
+            getline(cin, cls->professor);
 
             cout << "Course updated successfully!" << endl;
             return;
@@ -134,9 +136,9 @@ void view_courses() {
 
     for (const auto &cls : courses) {
         cout << setfill(' ') << left
-             << setw(20) << cls.name
-             << setw(15) << cls.time
-             << setw(15) << cls.professor << endl;
+             << setw(20) << cls->name
+             << setw(15) << cls->time
+             << setw(15) << cls->professor << endl;
     }
 //bottom line
     cout << setfill('-') << setw(WIDTH) << "" << endl;
@@ -150,7 +152,7 @@ void save_courses() { // never being caled, fix
     }
 
     for (const auto &cls : courses) {
-        file << cls.name << "," << cls.time << "," << cls.professor << "," << cls.grade << endl;
+        file << cls->name << "," << cls->time << "," << cls->professor << "," << cls->grade << endl;
     }
 
     file.close();
@@ -167,7 +169,7 @@ void load_courses() {
     courses.clear();
     string line;
     while (getline(file, line)) {
-        course cls;
+        auto cls = make_shared<course>(); //change smart pointer
         size_t pos1 = line.find(',');
         size_t pos2 = line.find(',', pos1 + 1);
         size_t pos3 = line.find(',', pos2 + 1);
@@ -177,12 +179,12 @@ void load_courses() {
             continue;
         }
 
-        cls.name = line.substr(0, pos1);
-        cls.time = line.substr(pos1 + 1, pos2 - pos1 - 1);
-        cls.professor = line.substr(pos2 + 1, pos3 - pos2 - 1);
+        cls->name = line.substr(0, pos1);
+        cls->time = line.substr(pos1 + 1, pos2 - pos1 - 1);
+        cls->professor = line.substr(pos2 + 1, pos3 - pos2 - 1);
 
         try {
-            cls.grade = stof(line.substr(pos3 + 1));
+            cls->grade = stof(line.substr(pos3 + 1));
         } catch (const invalid_argument &) {
             cout << "Error: Invalid grade format. Skipping..." << endl;
             continue;

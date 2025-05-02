@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 using namespace std;
 
 struct course {
@@ -12,7 +13,7 @@ struct course {
 	float grade;
 };
 
-extern vector<course> courses;
+extern vector<shared_ptr<course>> courses; //pointers 
 
 void manage_schedule();
 void add_course();

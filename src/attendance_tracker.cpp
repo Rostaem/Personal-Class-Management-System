@@ -66,7 +66,7 @@ void mark_attendance() {
     // Check if course exists in the schedule
     bool course_found_in_schedule = false;
     for (const auto &course : courses) {
-        if (course.name == course_name) {
+        if (course->name == course_name) {
             course_found_in_schedule = true;
             break;
         }
