@@ -42,6 +42,7 @@ add_executable(run_tests
         src/menu.cpp
         src/grade_tracker.cpp
         src/attendance_tracker.cpp
+        tests/grade_tracker_test.cpp
 )
 
 target_link_libraries(run_tests
