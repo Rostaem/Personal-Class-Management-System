@@ -40,24 +40,24 @@ void manage_schedule() {
         menu.display_menu(submenu_title, submenu_options);
         choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
-        switch (choice) { //modular design : different functions
-            case 1:
+        switch (static_cast<schedule_menu_option>(choice)) { //upgraded to enum
+            case ADD_COURSE:
                 add_course();
             break;
-            case 2:
+            case DELETE_COURSE:
                 delete_course();
             break;
-            case 3:
+            case EDIT_COURSE:
                 edit_course();
             break;
-            case 4:
+            case VIEW_COURSES:
                 view_courses();
             break;
-            case 5:
+            case BACK_TO_MAIN_MENU:
                 cout << "Returning to Main Menu..." << endl;
             break;
         }
-    } while (choice != 5);
+    } while (choice != BACK_TO_MAIN_MENU);
 }
 
 void add_course() {

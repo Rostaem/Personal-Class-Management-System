@@ -14,6 +14,14 @@ struct course {
 	float grade;
 };
 
+enum schedule_menu_option {
+	ADD_COURSE = 1,
+	DELETE_COURSE, //2
+	EDIT_COURSE,//3
+	VIEW_COURSES,//4
+	BACK_TO_MAIN_MENU//5
+};
+
 extern unordered_map<string, shared_ptr<course>> courses; //pointers
 
 void manage_schedule();
