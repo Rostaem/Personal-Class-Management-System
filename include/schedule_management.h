@@ -31,6 +31,7 @@ void edit_course();
 void view_courses();
 void save_courses();
 void load_courses();
+
 void load_courses_hybrid();
 void save_courses_hybrid();
 bool load_courses_binary();
