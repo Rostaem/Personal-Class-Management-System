@@ -5,6 +5,8 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <algorithm>
+#include <cctype>
 using namespace std;
 
 // The ultimate input validation function
@@ -29,5 +31,24 @@ T input_validation(T min, T max, const string& prompt) {
 		}
 	}
 }
+
+inline string trim(const string& str) {
+	size_t first = str.find_first_not_of(" \t\n\r");
+	if (first == string::npos)
+		return "";
+
+	size_t last = str.find_last_not_of(" \t\n\r");
+	return str.substr(first, last - first + 1);
+}
+
+inline string to_lower(const string& str) {
+	string result = str;
+	transform(result.begin(), result.end(), result.begin(),
+			  [](unsigned char c) { return tolower(c); });
+	return result;
+}
+
+
+
 
 #endif // UTILS_H

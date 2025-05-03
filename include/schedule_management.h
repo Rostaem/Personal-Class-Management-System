@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <unordered_map>
 using namespace std;
 
 struct course {
@@ -13,7 +14,7 @@ struct course {
 	float grade;
 };
 
-extern vector<shared_ptr<course>> courses; //pointers 
+extern unordered_map<string, shared_ptr<course>> courses; //pointers
 
 void manage_schedule();
 void add_course();
@@ -22,5 +23,9 @@ void edit_course();
 void view_courses();
 void save_courses();
 void load_courses();
+void load_courses_hybrid();
+void save_courses_hybrid();
+bool load_courses_binary();
+void save_courses_binary();
 
 #endif // SCHEDULE_MANAGEMENT_H
