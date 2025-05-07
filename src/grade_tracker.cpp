@@ -10,10 +10,6 @@
 
 using namespace std;
 
-struct Grade {
-    string course_name;
-    vector<float> assignment_grades;
-};
 
 vector<Grade> grade_records;
 
