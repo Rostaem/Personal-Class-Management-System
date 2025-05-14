@@ -1,5 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
+#include <iostream>
+#include <ostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -9,6 +11,7 @@ using namespace std;
 
 
 class Menu {
+
 private:
     const int WIDTH = 60;       //formatting
     const int BOX_WIDTH = 40;   // menu boxes
@@ -17,7 +20,9 @@ private:
     void format_box(const string& text, char border_char, int width) const;
 
 public:
-    Menu();
+    Menu() {
+        cout << "hey world" << endl;
+    };
 
     void display_main_menu() const;
 

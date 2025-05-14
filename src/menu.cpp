@@ -6,8 +6,6 @@
 #include <iomanip>
 using namespace std;
 
-Menu::Menu() {}
-
 /*formatting borders and centered text helper function*/
 void Menu::format_box(const string& text, char border_char, int width) const {
 
