@@ -61,13 +61,12 @@ void track_attendance() {
 void mark_attendance() {
     string course_name;
     cout << "Enter course name: ";
-    cin.ignore();
     getline(cin, course_name);
 
     // Check if course exists in the schedule
     bool course_found_in_schedule = false;
-    for (const auto &course : courses) {
-        if (course.name == course_name) {
+    for (const auto&[name, course_ptr] : courses) {
+        if (course_ptr->name == course_name) {
             course_found_in_schedule = true;
             break;
         }
@@ -79,28 +78,26 @@ void mark_attendance() {
         return; // Return to the attendance menu
     }
 
+    int attended;
+    string input;
+    while (true) {
+        cout << "Enter 1 if attended, 0 if absent: ";
+        getline(cin, input);
+        stringstream ss(input);
+
+        if (ss >> attended && ss.eof() && (attended == 0 || attended == 1)) {
+            break;
+        } else {
+            cout << "Invalid input, please enter 0 or 1..." << endl;
+        }
+    }
+
     for (auto &record : attendance_records) {
         if (record.course_name == course_name) {
-            int attended;
-
-            while (true) {
-                cout << "Enter 1 if attended, 0 if absent: ";
-                cin >> attended;
-
-                if (cin.fail() || (attended != 0 && attended != 1)) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    cout << "Invalid input. Please enter 0 or 1." << endl;
-                } else {
-                    break;
-                }
-            }
-
             record.total_courses++;
             if (attended == 1) {
                 record.attended_courses++;
             }
-
             cout << "Attendance marked successfully!" << endl;
             return;
         }
@@ -109,22 +106,6 @@ void mark_attendance() {
     Attendance new_record;
     new_record.course_name = course_name;
     new_record.total_courses = 1;
-
-    int attended;
-
-    while (true) {
-        cout << "Enter 1 if attended, 0 if absent: ";
-        cin >> attended;
-
-        if (cin.fail() || (attended != 0 && attended != 1)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter 0 or 1." << endl;
-        } else {
-            break;
-        }
-    }
-
     new_record.attended_courses = (attended == 1) ? 1 : 0;
     attendance_records.push_back(new_record);
 

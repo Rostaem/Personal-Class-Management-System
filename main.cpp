@@ -16,7 +16,7 @@ namespace fs = filesystem;
 int main() {
 	// Ensure the data directory exists and load previously saved data for courses, attendance, and grades
 	ensure_data_directory();
-	load_courses();
+	load_courses_hybrid();
 	load_attendance();
 	load_grades();
 
@@ -36,5 +36,10 @@ int main() {
 		}
 	}
 
+	save_courses_hybrid();
+	save_attendance();
+	save_grades();
+
+	cout << "all data saved..." << endl;
 	return 0;
 }
