@@ -22,6 +22,3 @@ Currently Working on:
 - looking into classes & objects
 - grade_tracking.cpp > add GPA calculation feature
 
-https://www.loom.com/share/900b5887cbab476e94fae9f9f8d90405?sid=c74fbb93-1a41-405d-8ad5-d7f437dee0c3
-
-https://youtu.be/ZDuZCbXTj2M
