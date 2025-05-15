@@ -57,7 +57,6 @@ void manage_grades() {
 void record_grade() {
     string course_name;
     cout << "Enter course name: ";
-    cin.ignore();
     getline(cin, course_name);
 
     for (auto &record : grade_records) {

@@ -22,10 +22,10 @@ void Menu::format_box(const string& text, char border_char, int width) const {
 /* display any menu (used for submenus) */
 void Menu::display_menu(const string& title, const vector<string>& options) const {
     // Top border
-    cout << setfill('=') << setw(WIDTH) << "=" << endl;
+    cout << setfill('=') << setw(WIDTH) << "=" << endl; //yes
 
     // Title
-    int padding = (WIDTH - title.length()) / 2;
+    int padding = (WIDTH - title.length()) / 2; //submenu title is not being centered
     cout << setfill(' ') << setw(padding + title.length()) << title
          << setw(WIDTH - padding - title.length()) << "" << endl;
 
