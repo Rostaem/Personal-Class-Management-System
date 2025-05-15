@@ -12,7 +12,7 @@ struct course {
 	float grade;
 };
 
-extern vector<course> courses;
+extern vector<course> courses; //get rid of thsi
 
 void manage_schedule();
 void add_course();
