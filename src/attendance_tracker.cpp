@@ -3,22 +3,16 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "attendance_tracker.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
 #include "menu.h"
+
 using namespace std;
 
-struct Attendance {
-    string course_name;
-    int total_courses;
-    int attended_courses;
-};
-
-vector<Attendance> attendance_records;
-
 // Purpose: Displays the attendance tracker menu and handles user input
-void track_attendance() {
+void AttendanceTracker::track_attendance() {
     Menu menu;
 
     string submenu_title = "Attendance Tracker";
@@ -42,23 +36,23 @@ void track_attendance() {
         switch (choice) {
             case 1:
                 mark_attendance();
-            break;
+                break;
             case 2:
                 calculate_attendance();
-            break;
+                break;
             case 3:
                 display_attendance();
-            break;
+                break;
             case 4:
                 cout << "Returning to Main Menu." << endl;
-            break;
+                break;
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
     } while (choice != 4);
 }
 
-void mark_attendance() {
+void AttendanceTracker::mark_attendance() {
     string course_name;
     cout << "Enter course name: ";
     getline(cin, course_name);
@@ -112,10 +106,9 @@ void mark_attendance() {
     cout << "Attendance marked successfully!" << endl;
 }
 
-void calculate_attendance() {
+void AttendanceTracker::calculate_attendance() {
     string course_name;
     cout << "Enter course name: ";
-    cin.ignore();
     getline(cin, course_name);
 
     for (const auto &record : attendance_records) {
@@ -134,7 +127,7 @@ void calculate_attendance() {
     cout << "Course not found in attendance records." << endl;
 }
 
-void display_attendance() {
+void AttendanceTracker::display_attendance() {
     if (attendance_records.empty()) {
         cout << "No attendance records available." << endl;
         return;
@@ -148,7 +141,7 @@ void display_attendance() {
     }
 }
 
-void save_attendance() {
+void AttendanceTracker::save_attendance() {
     ofstream file("data/attendance_data.txt");
     if (!file) {
         cout << "Error saving attendance data." << endl;
@@ -163,7 +156,7 @@ void save_attendance() {
     cout << "Attendance data saved successfully." << endl;
 }
 
-void load_attendance() {
+void AttendanceTracker::load_attendance() {
     ifstream file("data/attendance_data.txt");
     if (!file) {
         cout << "No saved attendance data found." << endl;

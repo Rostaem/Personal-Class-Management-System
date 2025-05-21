@@ -1,12 +1,28 @@
 #ifndef ATTENDANCE_TRACKER_H
 #define ATTENDANCE_TRACKER_H
 
-void track_attendance();
-void mark_attendance();
-void calculate_attendance();
-void display_attendance();
+#include <string>
+#include <vector>
 
-void save_attendance();
-void load_attendance();
+struct Attendance {
+	std::string course_name;
+	int total_courses;
+	int attended_courses;
+};
+
+class AttendanceTracker {
+private:
+	std::vector<Attendance> attendance_records;
+
+public:
+	void track_attendance();
+
+	void mark_attendance();
+	void calculate_attendance();
+	void display_attendance();
+
+	void save_attendance();
+	void load_attendance();
+};
 
 #endif // ATTENDANCE_TRACKER_H

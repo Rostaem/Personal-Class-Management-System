@@ -15,11 +15,12 @@ namespace fs = filesystem;
 
 int main() {
 	GradeTracker gradeTracker;
+	AttendanceTracker attendanceTracker;
 
 	// Ensure the data directory exists and load previously saved data for courses, attendance, and grades
 	ensure_data_directory();
 	load_courses();
-	load_attendance();
+	attendanceTracker.load_attendance();
 	gradeTracker.load_grades();
 
 	Menu menu;
@@ -33,10 +34,16 @@ int main() {
 			continue;
 		}
 
-		if (!menu.handle_main_menu_choice(choice, gradeTracker)) {
+
+		if (!menu.handle_main_menu_choice(choice, gradeTracker, attendanceTracker)) {
 			break;
 		}
 	}
+
+
+	save_courses();
+	attendanceTracker.save_attendance();
+	gradeTracker.save_grades();
 
 	return 0;
 }

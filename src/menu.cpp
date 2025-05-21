@@ -69,14 +69,14 @@ void Menu::display_main_menu() const {
 }
 
 // Handle main menu choice
-bool Menu::handle_main_menu_choice(int choice, GradeTracker& gradeTracker) const {
+bool Menu::handle_main_menu_choice(int choice, GradeTracker& gradeTracker, AttendanceTracker& attendanceTracker) const {
     switch (choice) {
         case 1:
             manage_schedule();
             break;
 
         case 2:
-            track_attendance();
+            attendanceTracker.track_attendance();
             break;
 
         case 3:
