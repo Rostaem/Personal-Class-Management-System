@@ -8,13 +8,12 @@ using namespace std;
 
 /*formatting borders and centered text helper function*/
 void Menu::format_box(const string& text, char border_char, int width) const {
+    cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
 
-  cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
-
-    int padding = (width - text.length()) / 2;
+    int padding = (width - static_cast<int>(text.length())) / 2;
     cout << "|" << setfill(' ')
          << setw(padding) << "" << text
-         << setw(width - padding - text.length()) << "" << "|" << endl;
+         << setw(width - padding - static_cast<int>(text.length())) << "" << "|" << endl;
 
     cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
 }
@@ -22,12 +21,12 @@ void Menu::format_box(const string& text, char border_char, int width) const {
 /* display any menu (used for submenus) */
 void Menu::display_menu(const string& title, const vector<string>& options) const {
     // Top border
-    cout << setfill('=') << setw(WIDTH) << "=" << endl; //yes
+    cout << setfill('=') << setw(WIDTH) << "=" << endl;
 
     // Title
-    int padding = (WIDTH - title.length()) / 2; //submenu title is not being centered
-    cout << setfill(' ') << setw(padding + title.length()) << title
-         << setw(WIDTH - padding - title.length()) << "" << endl;
+    int padding = (WIDTH - static_cast<int>(title.length())) / 2; // submenu title is not being centered
+    cout << setfill(' ') << setw(padding + static_cast<int>(title.length())) << title
+         << setw(WIDTH - padding - static_cast<int>(title.length())) << "" << endl;
 
     // Bottom border
     cout << setfill('=') << setw(WIDTH) << "=" << endl;
@@ -44,14 +43,14 @@ void Menu::display_main_menu() const {
 
     // Title
     string title = "Welcome to your Personal Course Management System!";
-    int padding = (WIDTH - title.length()) / 2;
-    cout << setfill(' ') << setw(padding + title.length()) << title
-         << setw(WIDTH - padding - title.length()) << "" << endl;
+    int padding = (WIDTH - static_cast<int>(title.length())) / 2;
+    cout << setfill(' ') << setw(padding + static_cast<int>(title.length())) << title
+         << setw(WIDTH - padding - static_cast<int>(title.length())) << "" << endl;
 
     string subtitle = "Choose where to navigate:";
-    padding = (WIDTH - subtitle.length()) / 2;
-    cout << setw(padding + subtitle.length()) << subtitle
-         << setw(WIDTH - padding - subtitle.length()) << "" << endl;
+    padding = (WIDTH - static_cast<int>(subtitle.length())) / 2;
+    cout << setw(padding + static_cast<int>(subtitle.length())) << subtitle
+         << setw(WIDTH - padding - static_cast<int>(subtitle.length())) << "" << endl;
 
     // Bottom border
     cout << setfill('*') << setw(WIDTH) << "" << endl;
@@ -67,11 +66,10 @@ void Menu::display_main_menu() const {
     for (const string& option : main_menu_options) {
         format_box(option, '-', BOX_WIDTH); // using helper function for boxes
     }
-
 }
 
 // Handle main menu choice
-bool Menu::handle_main_menu_choice(int choice) const {
+bool Menu::handle_main_menu_choice(int choice, GradeTracker& gradeTracker) const {
     switch (choice) {
         case 1:
             manage_schedule();
@@ -82,13 +80,13 @@ bool Menu::handle_main_menu_choice(int choice) const {
             break;
 
         case 3:
-            manage_grades();
+            gradeTracker.manage_grades();
             break;
 
         case 4:
             cout << "Goodbye! Saving all data..." << endl;
             save_courses(); // calling functions to save data to file (data)
-            save_grades();
+            gradeTracker.save_grades();
             return false;
 
         default:

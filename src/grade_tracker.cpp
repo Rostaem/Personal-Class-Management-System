@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <iomanip>
+
 #include "grade_tracker.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
@@ -10,16 +6,7 @@
 
 using namespace std;
 
-struct Grade {
-    string course_name;
-    vector<float> assignment_grades;
-};
-
-vector<Grade> grade_records;
-
-// Purpose: Displays the grade tracker menu and handles user input
-
-void manage_grades() {
+void GradeTracker::manage_grades() {
     Menu menu;
 
     string submenu_title = "Grade Tracker";
@@ -32,37 +19,29 @@ void manage_grades() {
 
     int choice;
     do {
-        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
+        menu.display_menu(submenu_title, submenu_options);
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         switch (choice) {
-            case 1:
-                record_grade();
-            break;
-            case 2:
-                calculate_grades();
-            break;
-            case 3:
-                display_grades();
-            break;
-            case 4:
-                cout << "Returning to Main Menu." << endl;
-            break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
+            case 1: record_grade(); break;
+            case 2: calculate_grades(); break;
+            case 3: display_grades(); break;
+            case 4: cout << "Returning to Main Menu." << endl; break;
+            default: cout << "Invalid choice. Please try again." << endl;
         }
     } while (choice != 4);
 }
 
-void record_grade() {
+void GradeTracker::record_grade() {
     string course_name;
     cout << "Enter course name: ";
+    cin.ignore();
     getline(cin, course_name);
 
     for (auto &record : grade_records) {
         if (record.course_name == course_name) {
             float grade;
-            cout << "Enter assignment grade (0 - 100): "; // in the future implement letter grade conversion
+            cout << "Enter assignment grade (0 - 100): ";
             cin >> grade;
 
             while (cin.fail() || grade < 0 || grade > 100) {
@@ -98,7 +77,7 @@ void record_grade() {
     cout << "Grade recorded successfully!" << endl;
 }
 
-void calculate_grades() { //talk about thus function
+void GradeTracker::calculate_grades() {
     string course_name;
     cout << "Enter course name: ";
     cin.ignore();
@@ -125,23 +104,23 @@ void calculate_grades() { //talk about thus function
     cout << "Course not found in grade records." << endl;
 }
 
-void display_grades() {
+void GradeTracker::display_grades() {
     if (grade_records.empty()) {
         cout << "No grade records available." << endl;
         return;
     }
 
-    cout << "\n=== Grade Records ===" << endl; //improve formatting
+    cout << "\n=== Grade Records ===\n";
     for (const auto &record : grade_records) {
-        cout << "Course: " << record.course_name << ", Grades: ";
+        cout << "Course: " << record.course_name << "\nGrades: ";
         for (float grade : record.assignment_grades) {
             cout << grade << " ";
         }
-        cout << endl;
+        cout << "\n-----------------------------\n";
     }
 }
 
-void save_grades() { // not being called
+void GradeTracker::save_grades() {
     ofstream file("data/grades_data.txt");
     if (!file) {
         cout << "Error saving grade data." << endl;
@@ -160,7 +139,7 @@ void save_grades() { // not being called
     cout << "Grade data saved successfully." << endl;
 }
 
-void load_grades() {
+void GradeTracker::load_grades() {
     ifstream file("data/grades_data.txt");
     if (!file) {
         cout << "No saved grade data found." << endl;
@@ -181,7 +160,14 @@ void load_grades() {
             record.assignment_grades.push_back(stof(line.substr(pos, next_pos - pos)));
             pos = next_pos + 1;
         }
-        record.assignment_grades.push_back(stof(line.substr(pos)));
+
+        if (pos < line.size()) {
+            try {
+                record.assignment_grades.push_back(stof(line.substr(pos)));
+            } catch (...) {
+                // Skip malformed grade
+            }
+        }
 
         grade_records.push_back(record);
     }

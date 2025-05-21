@@ -14,11 +14,13 @@ using namespace std;
 namespace fs = filesystem;
 
 int main() {
+	GradeTracker gradeTracker;
+
 	// Ensure the data directory exists and load previously saved data for courses, attendance, and grades
 	ensure_data_directory();
 	load_courses();
 	load_attendance();
-	load_grades();
+	gradeTracker.load_grades();
 
 	Menu menu;
 
@@ -31,7 +33,7 @@ int main() {
 			continue;
 		}
 
-		if (!menu.handle_main_menu_choice(choice)) {
+		if (!menu.handle_main_menu_choice(choice, gradeTracker)) {
 			break;
 		}
 	}
