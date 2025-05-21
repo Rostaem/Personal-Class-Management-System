@@ -3,25 +3,26 @@
 #include <limits>
 #include <fstream>
 #include <filesystem>
-#include "include/menu.h"
-#include "include/schedule_management.h"
-#include "include/attendance_tracker.h"
-#include "include/grade_tracker.h"
-#include "include/ensure_data_directory.h"
-#include "src/utils/utils.h"
+
+#include "menu.h"
+#include "schedule_management.h"
+#include "attendance_tracker.h"
+#include "grade_tracker.h"
+#include "ensure_data_directory.h"
+#include "utils.h"
 
 using namespace std;
 namespace fs = filesystem;
 
 int main() {
-	GradeTracker gradeTracker;
-	AttendanceTracker attendanceTracker;
+	GradeTracker grade_tracker;
+	AttendanceTracker attendance_tracker;
+	ScheduleManager schedule_manager;
 
-	// Ensure the data directory exists and load previously saved data for courses, attendance, and grades
 	ensure_data_directory();
-	load_courses();
-	attendanceTracker.load_attendance();
-	gradeTracker.load_grades();
+	schedule_manager.load_courses();
+	attendance_tracker.load_attendance();
+	grade_tracker.load_grades();
 
 	Menu menu;
 
@@ -34,16 +35,14 @@ int main() {
 			continue;
 		}
 
-
-		if (!menu.handle_main_menu_choice(choice, gradeTracker, attendanceTracker)) {
+		if (!menu.handle_main_menu_choice(choice, grade_tracker, attendance_tracker, schedule_manager)) {
 			break;
 		}
 	}
 
-
-	save_courses();
-	attendanceTracker.save_attendance();
-	gradeTracker.save_grades();
+	schedule_manager.save_courses();
+	attendance_tracker.save_attendance();
+	grade_tracker.save_grades();
 
 	return 0;
 }

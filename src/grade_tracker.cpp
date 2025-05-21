@@ -1,4 +1,3 @@
-
 #include "grade_tracker.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
@@ -110,13 +109,13 @@ void GradeTracker::display_grades() {
         return;
     }
 
-    cout << "\n=== Grade Records ===\n";
+    cout << endl << "=== Grade Records ===" << endl;
     for (const auto &record : grade_records) {
-        cout << "Course: " << record.course_name << "\nGrades: ";
+        cout << "Course: " << record.course_name << endl << "Grades: ";
         for (float grade : record.assignment_grades) {
             cout << grade << " ";
         }
-        cout << "\n-----------------------------\n";
+        cout << endl << "-----------------------------" << endl;
     }
 }
 
@@ -165,7 +164,6 @@ void GradeTracker::load_grades() {
             try {
                 record.assignment_grades.push_back(stof(line.substr(pos)));
             } catch (...) {
-                // Skip malformed grade
             }
         }
 

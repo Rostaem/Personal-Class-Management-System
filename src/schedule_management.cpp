@@ -6,18 +6,16 @@
 #include <limits>
 #include "schedule_management.h"
 #include "menu.h"
-#include "utils/utils.h"
-
-#define WIDTH 50
+#include "utils.h"
 
 using namespace std;
 
-vector<course> courses;
+const int WIDTH = 50;
 
-void manage_schedule() {
+void ScheduleManager::manage_schedule() {
     Menu menu;
-// thsi is supposed to call submenu in menu class
-    string submenu_title = "Schedule Management1";
+
+    string submenu_title = "Schedule Management";
     vector<string> submenu_options = {
         "1. Add Course",
         "2. Delete Course",
@@ -28,33 +26,33 @@ void manage_schedule() {
 
     int choice;
     do {
-        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu...it's supposed to uyse submenui
-        choice = input_validation(1, 5, "Enter your choice (1-5): "); // look closely here
+        menu.display_menu(submenu_title, submenu_options);
+        choice = input_validation(1, 5, "Enter your choice (1-5): ");
 
         switch (choice) {
             case 1:
                 add_course();
-            break;
+                break;
             case 2:
                 delete_course();
-            break;
+                break;
             case 3:
                 edit_course();
-            break;
+                break;
             case 4:
                 view_courses();
-            break;
+                break;
             case 5:
                 cout << "Returning to Main Menu..." << endl;
-            break;
+                break;
         }
     } while (choice != 5);
 }
 
-void add_course() {
+void ScheduleManager::add_course() {
     course new_course;
     cout << "Enter course name: ";
-     cin.ignore();
+    cin.ignore();
     getline(cin, new_course.name);
 
     if (new_course.name.empty()) {
@@ -74,15 +72,15 @@ void add_course() {
     cout << "Course added successfully!" << endl;
 }
 
-void delete_course() {
+void ScheduleManager::delete_course() {
     string course_name;
     cin.ignore();
     cout << "Enter the name of the course to delete: ";
     getline(cin, course_name);
 
-    for (auto it = courses.begin(); it != courses.end(); ++it) { // for loop that iterates through a list of courses to find and delete a course by its name
-        if (it->name == course_name) { // Checks if the name field of the course object (pointed to by the iterator it) matches the course_name provided by the user
-            courses.erase(it); //Removes the course object from the courses container at the position pointed to by the iterator it.
+    for (auto it = courses.begin(); it != courses.end(); ++it) {
+        if (it->name == course_name) {
+            courses.erase(it);
             cout << "Course deleted successfully!" << endl;
             return;
         }
@@ -91,14 +89,14 @@ void delete_course() {
     cout << "Course not found." << endl;
 }
 
-void edit_course() {
+void ScheduleManager::edit_course() {
     string course_name;
     cin.ignore();
     cout << "Enter the name of the course to edit: ";
     getline(cin, course_name);
 
-    for (auto &cls : courses) {
-        if (cls.name == course_name) { // Checks if the name of the current course (cls.name) matches the course_name entered by the user.
+    for (auto& cls : courses) {
+        if (cls.name == course_name) {
             cout << "Editing course: " << cls.name << endl;
 
             cout << "Enter new course time (current: " << cls.time << "): ";
@@ -115,12 +113,12 @@ void edit_course() {
     cout << "Course not found. Returning to menu." << endl;
 }
 
-void view_courses() {
+void ScheduleManager::view_courses() {
     if (courses.empty()) {
         cout << "No courses available." << endl;
         return;
     }
-//display the table, consider making a helper function down the line
+
     string header = "Course Schedule";
     int header_centering = (WIDTH - header.length()) / 2;
     cout << endl << setfill(' ') << setw(header_centering) << "" << header << endl;
@@ -132,24 +130,24 @@ void view_courses() {
          << setw(15) << "Professor" << endl;
     cout << setfill('-') << setw(WIDTH) << "" << endl;
 
-    for (const auto &cls : courses) {
+    for (const auto& cls : courses) {
         cout << setfill(' ') << left
              << setw(20) << cls.name
              << setw(15) << cls.time
              << setw(15) << cls.professor << endl;
     }
-//bottom line
+
     cout << setfill('-') << setw(WIDTH) << "" << endl;
 }
 
-void save_courses() { // never being caled, fix
+void ScheduleManager::save_courses() {
     ofstream file("data/courses_data.txt");
     if (!file) {
         cout << "Error: Unable to save course data." << endl;
         return;
     }
 
-    for (const auto &cls : courses) {
+    for (const auto& cls : courses) {
         file << cls.name << "," << cls.time << "," << cls.professor << "," << cls.grade << endl;
     }
 
@@ -157,7 +155,7 @@ void save_courses() { // never being caled, fix
     cout << "Courses saved successfully!" << endl;
 }
 
-void load_courses() {
+void ScheduleManager::load_courses() {
     ifstream file("data/courses_data.txt");
     if (!file) {
         cout << "No saved course data found." << endl;
@@ -183,7 +181,7 @@ void load_courses() {
 
         try {
             cls.grade = stof(line.substr(pos3 + 1));
-        } catch (const invalid_argument &) {
+        } catch (const invalid_argument&) {
             cout << "Error: Invalid grade format. Skipping..." << endl;
             continue;
         }
@@ -193,4 +191,8 @@ void load_courses() {
 
     file.close();
     cout << "Courses loaded successfully!" << endl;
+}
+
+const vector<course>& ScheduleManager::get_courses() const {
+    return courses;
 }

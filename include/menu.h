@@ -1,22 +1,20 @@
 #ifndef MENU_H
 #define MENU_H
+
 #include <iostream>
-#include <ostream>
 #include <string>
 #include <vector>
 #include "grade_tracker.h"
 #include "attendance_tracker.h"
-using namespace std;
+#include "schedule_management.h"
 
-// this file was previously named main_menu_display and it served the purpose of storing the function to display the main menu
-// it's now used to display all menus (main menu and submenu, by using a menu class which will store both functions)
+using namespace std;
 
 class Menu {
 private:
-	const int WIDTH = 60;       // formatting
-	const int BOX_WIDTH = 40;   // menu boxes
+	const int WIDTH = 60;
+	const int BOX_WIDTH = 40;
 
-	// Helper function for formatting borders and centered text (used for submenus and main menu)
 	void format_box(const string& text, char border_char, int width) const;
 
 public:
@@ -25,12 +23,9 @@ public:
 	};
 
 	void display_main_menu() const;
-
 	void display_menu(const string& title, const vector<string>& options) const;
 
-	bool handle_main_menu_choice(int choice, GradeTracker& gradeTracker, AttendanceTracker& attendanceTracker) const;
+	bool handle_main_menu_choice(int choice, GradeTracker& grade_tracker, AttendanceTracker& attendance_tracker, ScheduleManager& schedule_manager) const;
 };
 
 #endif // MENU_H
-
-
