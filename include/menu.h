@@ -28,7 +28,7 @@ public:
 
 	void display_menu(const string& title, const vector<string>& options) const;
 
-	bool handle_main_menu_choice(int choice, GradeTracker& gradeTracker, AttendanceTracker& attendanceTracker) const;
+	bool handle_main_menu_choice(int choice, GradeTracker& gradeTracker, AttendanceTracker& attendanceTracker, CourseManager& courseManager) const;
 };
 
 #endif // MENU_H

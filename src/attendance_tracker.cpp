@@ -12,7 +12,7 @@
 using namespace std;
 
 // Purpose: Displays the attendance tracker menu and handles user input
-void AttendanceTracker::track_attendance() {
+void AttendanceTracker::track_attendance(const std::vector<Course>& courses) {
     Menu menu;
 
     string submenu_title = "Attendance Tracker";
@@ -25,7 +25,7 @@ void AttendanceTracker::track_attendance() {
 
     int choice;
     do {
-        menu.display_menu(submenu_title, submenu_options); // Updated to use display_menu
+        menu.display_menu(submenu_title, submenu_options);
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         if (choice == -1) {
@@ -35,29 +35,28 @@ void AttendanceTracker::track_attendance() {
 
         switch (choice) {
             case 1:
-                mark_attendance();
-                break;
+                mark_attendance(courses); // updated
+            break;
             case 2:
                 calculate_attendance();
-                break;
+            break;
             case 3:
                 display_attendance();
-                break;
+            break;
             case 4:
                 cout << "Returning to Main Menu." << endl;
-                break;
+            break;
             default:
                 cout << "Invalid choice. Please try again." << endl;
         }
     } while (choice != 4);
 }
 
-void AttendanceTracker::mark_attendance() {
+void AttendanceTracker::mark_attendance(const std::vector<Course>& courses) {
     string course_name;
     cout << "Enter course name: ";
     getline(cin, course_name);
 
-    // Check if course exists in the schedule
     bool course_found_in_schedule = false;
     for (const auto &course : courses) {
         if (course.name == course_name) {
@@ -68,8 +67,7 @@ void AttendanceTracker::mark_attendance() {
 
     if (!course_found_in_schedule) {
         cout << "Course '" << course_name << "' doesn't exist in the schedule." << endl;
-        cout << "Please add the course to the schedule first, then track attendance." << endl;
-        return; // Return to the attendance menu
+        return;
     }
 
     int attended;
@@ -105,7 +103,6 @@ void AttendanceTracker::mark_attendance() {
 
     cout << "Attendance marked successfully!" << endl;
 }
-
 void AttendanceTracker::calculate_attendance() {
     string course_name;
     cout << "Enter course name: ";
