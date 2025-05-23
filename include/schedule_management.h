@@ -2,8 +2,8 @@
 #include "course_management.h"
 
 class ScheduleManager {
-CourseManager courseManager;
+	CourseManager courseManager;
 
-public:
-	void manage_schedule();
+	public:
+		void manage_schedule();
 };

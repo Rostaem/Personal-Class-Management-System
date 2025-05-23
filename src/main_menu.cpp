@@ -34,8 +34,7 @@ void MainMenu::display() const {
 
 bool MainMenu::handle_choice(int choice, GradeTracker& gradeTracker,
                           AttendanceTracker& attendanceTracker,
-                          CourseManager& courseManager) const {
-    ScheduleManager scheduleManager;
+                          CourseManager& courseManager) {
 
     switch (choice) {
         case 1:

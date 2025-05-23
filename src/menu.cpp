@@ -16,7 +16,8 @@ void Menu::format_box(const string& text, char border_char, int width) const {
     int padding = (width - static_cast<int>(text.length())) / 2;
     cout << "|" << setfill(' ')
          << setw(padding) << "" << text
-         << setw(width - padding - static_cast<int>(text.length()))1
+         << setw(width - padding - static_cast<int>(text.length()))
 	<< "" << "|" << endl;
     cout << "|" << setfill(border_char) << setw(width) << "" << "|" << endl;
 }
+

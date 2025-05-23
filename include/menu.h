@@ -29,7 +29,7 @@ public:
 	virtual void display() const = 0;
 	virtual bool handle_choice(int choice, GradeTracker& gradeTracker,
 						   AttendanceTracker& attendanceTracker,
-						   CourseManager& courseManager) const = 0;
+						   CourseManager& courseManager) = 0;
 };
 
 #endif // MENU_H

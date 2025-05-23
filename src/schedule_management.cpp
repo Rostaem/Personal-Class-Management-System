@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-void ScheduleManager::manage_schedule() {
+void ScheduleManager::manage_schedule(){
 	MainMenu menu;
 
 	string submenu_title = "Schedule Management";
