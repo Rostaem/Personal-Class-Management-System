@@ -1,25 +1,9 @@
-#ifndef SCHEDULE_MANAGEMENT_H
-#define SCHEDULE_MANAGEMENT_H
+#pragma once
+#include "course_management.h"
 
-#include <vector>
-#include <string>
-using namespace std;
+class ScheduleManager {
+CourseManager courseManager;
 
-struct course {
-	string name;
-	string time;
-	string professor;
-	float grade;
+public:
+	void manage_schedule();
 };
-
-extern vector<course> courses; //get rid of thsi
-
-void manage_schedule();
-void add_course();
-void delete_course();
-void edit_course();
-void view_courses();
-void save_courses();
-void load_courses();
-
-#endif // SCHEDULE_MANAGEMENT_H

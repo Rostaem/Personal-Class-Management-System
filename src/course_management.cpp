@@ -1,4 +1,11 @@
 #include "course_management.h"
+#include <iostream>
+#include <iomanip>
+#include<fstream>
+using namespace std;
+
+#define WIDTH 50
+
 void CourseManager::add_course() {
     Course new_course;
     cout << "Enter course name: ";
@@ -141,4 +148,8 @@ void CourseManager::load_courses() {
 
     file.close();
     cout << "Courses loaded successfully!" << endl;
+}
+
+const std::vector<Course>& CourseManager::get_courses() const {
+    return courses;
 }

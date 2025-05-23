@@ -20,6 +20,6 @@ add_executable(Personal_Class_Management_System
         #utils
         src/utils/ensure_data_directory.cpp
         src/course_management.cpp
-        src/course_management.h
+        include/course_management.h
 )
 
