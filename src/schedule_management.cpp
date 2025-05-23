@@ -9,7 +9,9 @@
 
 using namespace std;
 
-void ScheduleManager::manage_schedule(CourseManager& courseManager) {
+
+
+void ScheduleManager::manage_schedule() {
 	Menu menu;
 
 	string submenu_title = "Schedule Management";
@@ -21,6 +23,8 @@ void ScheduleManager::manage_schedule(CourseManager& courseManager) {
 		"5. Save Courses",
 		"6. Back to Main Menu"
 	};
+
+
 
 	int choice;
 	do {

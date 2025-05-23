@@ -63,7 +63,7 @@ bool Menu::handle_main_menu_choice(int choice, GradeTracker& gradeTracker, Atten
 
     switch (choice) {
         case 1:
-            scheduleManager.manage_schedule(courseManager);
+            scheduleManager.manage_schedule();
         break;
         case 2:
             attendanceTracker.track_attendance(courseManager.get_courses());
