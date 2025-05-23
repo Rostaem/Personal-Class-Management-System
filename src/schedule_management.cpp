@@ -1,6 +1,6 @@
 #include "schedule_management.h"
 #include "course_management.h"
-#include "menu.h"
+#include "main_menu.h"
 #include "utils.h"
 
 #include <iostream>
@@ -12,7 +12,7 @@ using namespace std;
 
 
 void ScheduleManager::manage_schedule() {
-	Menu menu;
+	MainMenu menu;
 
 	string submenu_title = "Schedule Management";
 	vector<string> submenu_options = {
@@ -28,7 +28,7 @@ void ScheduleManager::manage_schedule() {
 
 	int choice;
 	do {
-		menu.display_menu(submenu_title, submenu_options);
+		menu.display();
 		choice = input_validation(1, 6, "Enter your choice (1-6): ");
 
 		switch (choice) {

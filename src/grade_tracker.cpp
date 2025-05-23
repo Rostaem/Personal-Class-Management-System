@@ -1,13 +1,14 @@
 
 #include "grade_tracker.h"
+
+#include "main_menu.h"
 #include "schedule_management.h"
 #include "utils/utils.h"
-#include "menu.h"
 
 using namespace std;
 
 void GradeTracker::manage_grades() {
-    Menu menu;
+    MainMenu menu;
 
     string submenu_title = "Grade Tracker";
     vector<string> submenu_options = {
@@ -19,7 +20,7 @@ void GradeTracker::manage_grades() {
 
     int choice;
     do {
-        menu.display_menu(submenu_title, submenu_options);
+        menu.display();
         choice = input_validation(1, 4, "Enter your choice (1-4): ");
 
         switch (choice) {
