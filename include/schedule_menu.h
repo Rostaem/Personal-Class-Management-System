@@ -11,15 +11,14 @@
 class ScheduleMenu: public Menu {
 public:
 	// Override the display method from the base class
-	void display() const override;
+	void display() override;
 
 	// Override the handle_choice method from the base class
-	bool handle_choice(int choice, GradeTracker& gradeTracker,
-					AttendanceTracker& attendanceTracker,
-					CourseManager& courseManager) override;
+	bool handle_choice(int choice) override;
 	virtual ~ScheduleMenu() = default;
 
 private:
 	ScheduleManager scheduleManager;
+	CourseManager courseManager;
 };
 #endif

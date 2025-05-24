@@ -27,10 +27,8 @@ public:
 	virtual ~Menu() = default;
 
 	// Methods that can be overridden by derived classes
-	virtual void display() const = 0;
-	virtual bool handle_choice(int choice, GradeTracker& gradeTracker,
-						   AttendanceTracker& attendanceTracker,
-						   CourseManager& courseManager) = 0;
+	virtual void display() = 0;
+	virtual bool handle_choice(int choice) = 0;
 };
 
 #endif // MENU_H

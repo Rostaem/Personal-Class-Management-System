@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void MainMenu::display() const {
+void MainMenu::display() {
     // Main menu specific display
     cout << setfill('*') << setw(WIDTH) << "" << endl;
     string title = "Welcome to your Personal Course Management System!";
@@ -32,14 +32,13 @@ void MainMenu::display() const {
     }
 }
 
-bool MainMenu::handle_choice(int choice, GradeTracker& gradeTracker,
-                          AttendanceTracker& attendanceTracker,
-                          CourseManager& courseManager) {
+bool MainMenu::handle_choice(int choice) {
 
     switch (choice) {
         case 1:
-            // scheduleMenu.display()
-            scheduleManager.manage_schedule();
+            scheduleMenu.display();
+            scheduleMenu.handle_choice(0);
+            //scheduleManager.manage_schedule();
             break;
         case 2:
             attendanceTracker.track_attendance(courseManager.get_courses());

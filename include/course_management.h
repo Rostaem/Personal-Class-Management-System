@@ -16,6 +16,9 @@ private:
 	std::vector<Course> courses;
 
 public:
+	CourseManager() {
+		load_courses();
+	}
 	void add_course();
 	void delete_course();
 	void edit_course();

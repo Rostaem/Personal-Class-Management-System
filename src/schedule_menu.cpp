@@ -1,7 +1,7 @@
 #include "schedule_menu.h"
 #include "utils.h"
 
-void ScheduleMenu::display() const {
+void ScheduleMenu::display() {
 	string submenu_title = "Schedule Management";
 	vector<string> submenu_options = {
 	"1. Add Course",
@@ -15,10 +15,9 @@ void ScheduleMenu::display() const {
 	display_submenu(submenu_title, submenu_options);
 };
 
-bool ScheduleMenu::handle_choice(int choice, GradeTracker& gradeTracker,
-						  AttendanceTracker& attendanceTracker,
-						  CourseManager& courseManager) {
-	do {
+bool ScheduleMenu::handle_choice(int choice) {
+	while (choice != 6){
+		if (choice !=0) display();
 		choice = input_validation(1, 6, "Enter your choice (1-6): ");
 
 		switch (choice) {
@@ -41,5 +40,6 @@ bool ScheduleMenu::handle_choice(int choice, GradeTracker& gradeTracker,
 				cout << "Returning to Main Menu..." << endl;
 			break;
 		}
-	} while (choice != 6);
+	};
+	return true;
 }

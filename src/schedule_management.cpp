@@ -29,6 +29,7 @@ void ScheduleManager::manage_schedule(){
 	int choice;
 	do {
 		menu.display();
+		cout << "Schedule Management" << endl;
 		choice = input_validation(1, 6, "Enter your choice (1-6): ");
 
 		switch (choice) {
