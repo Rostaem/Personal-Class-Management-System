@@ -9,7 +9,6 @@ using namespace std;
 void CourseManager::add_course() {
     Course new_course;
     cout << "Enter course name: ";
-    cin.ignore();
     getline(cin, new_course.name);
 
     if (new_course.name.empty()) {
@@ -77,7 +76,7 @@ void CourseManager::view_courses() {
     }
 
     string header = "Course Schedule";
-    int header_centering = (WIDTH - header.length()) / 2;
+    int header_centering = (WIDTH - header.length()) / 2; // re use centering function
     cout << endl << setfill(' ') << setw(header_centering) << "" << header << endl;
 
     cout << setfill('-') << setw(WIDTH) << "" << endl;
@@ -95,6 +94,8 @@ void CourseManager::view_courses() {
     }
 
     cout << setfill('-') << setw(WIDTH) << "" << endl;
+
+    cout << right << setfill(' ');
 }
 
 void CourseManager::save_courses() {
