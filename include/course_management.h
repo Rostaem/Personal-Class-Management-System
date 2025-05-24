@@ -12,10 +12,9 @@ struct Course {
 };
 
 class CourseManager {
-private:
-	std::vector<Course> courses;
 
 public:
+	std::vector<Course> courses;
 	CourseManager() {
 		if (courses.size() == 0) {
 			load_courses();

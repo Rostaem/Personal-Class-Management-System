@@ -8,6 +8,7 @@
 #include "course_management.h"
 #include<iomanip>
 
+#include "attendance_menu.h"
 #include "schedule_menu.h"
 
 class MainMenu : public Menu {
@@ -16,12 +17,12 @@ class MainMenu : public Menu {
 		void display() override;
 
 		// Override the handle_choice method from the base class
-		bool handle_choice(int choice, CourseManager& courseManager) override;
+		bool handle_choice(int choice, CourseManager& courseManager, AttendanceTracker& attendanceTracker) override;
 		virtual ~MainMenu() = default;
 
 	private:
-		AttendanceTracker attendanceTracker;
 		GradeTracker gradeTracker;
 		ScheduleMenu scheduleMenu;
+		AttendanceMenu attendanceMenu;
 };
 #endif //MAIN_MENU_H

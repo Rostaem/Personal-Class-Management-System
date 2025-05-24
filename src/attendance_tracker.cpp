@@ -11,46 +11,6 @@
 
 using namespace std;
 
-// Purpose: Displays the attendance tracker menu and handles user input
-void AttendanceTracker::track_attendance(const std::vector<Course>& courses) {
-    MainMenu menu;
-
-    string submenu_title = "Attendance Tracker";
-    vector<string> submenu_options = {
-        "1. Track Attendance",
-        "2. Calculate Attendance Percentage",
-        "3. Display Attendance Records",
-        "4. Back to Main Menu"
-    };
-
-    int choice;
-    do {
-        menu.display();
-        choice = input_validation(1, 4, "Enter your choice (1-4): ");
-
-        if (choice == -1) {
-            cout << "Invalid input, please enter a number between 1 and 4. Returning to menu..." << endl;
-            continue;
-        }
-
-        switch (choice) {
-            case 1:
-                mark_attendance(courses); // updated
-            break;
-            case 2:
-                calculate_attendance();
-            break;
-            case 3:
-                display_attendance();
-            break;
-            case 4:
-                cout << "Returning to Main Menu." << endl;
-            break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
-        }
-    } while (choice != 4);
-}
 
 void AttendanceTracker::mark_attendance(const std::vector<Course>& courses) {
     string course_name;

@@ -34,7 +34,7 @@ int main() {
 		}
 
 		// Check wether we can include this in the MainMenu class
-		if (!mainMenu.handle_choice(choice, courseManager)) {
+		if (!mainMenu.handle_choice(choice, courseManager, attendanceTracker)) {
 			break;
 		}
 	}

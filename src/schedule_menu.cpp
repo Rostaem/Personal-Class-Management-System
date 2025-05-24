@@ -15,7 +15,7 @@ void ScheduleMenu::display() {
 	display_submenu(submenu_title, submenu_options);
 };
 
-bool ScheduleMenu::handle_choice(int choice, CourseManager& courseManager) {
+bool ScheduleMenu::handle_choice(int choice, CourseManager& courseManager, AttendanceTracker& attendanceTracker) {
 	while (choice != 6){
 		if (choice !=0) display();
 		choice = input_validation(1, 6, "Enter your choice (1-6): ");

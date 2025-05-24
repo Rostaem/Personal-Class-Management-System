@@ -31,16 +31,16 @@ void MainMenu::display() {
     }
 }
 
-bool MainMenu::handle_choice(int choice, CourseManager& courseManager) {
+bool MainMenu::handle_choice(int choice, CourseManager& courseManager, AttendanceTracker& attendanceTracker) {
 
     switch (choice) {
         case 1:
             scheduleMenu.display();
-            scheduleMenu.handle_choice(0, courseManager);
-            //scheduleManager.manage_schedule();
+            scheduleMenu.handle_choice(0, courseManager, attendanceTracker);
             break;
         case 2:
-            attendanceTracker.track_attendance(courseManager.get_courses());
+            attendanceMenu.display();
+            attendanceMenu.handle_choice(0, courseManager, attendanceTracker);
             break;
         case 3:
             gradeTracker.manage_grades();
