@@ -11,7 +11,6 @@ add_executable(Personal_Class_Management_System
         main.cpp
 
         #features
-        src/schedule_management.cpp
         src/attendance_tracker.cpp
         src/grade_tracker.cpp
         src/menu.cpp
@@ -21,5 +20,9 @@ add_executable(Personal_Class_Management_System
         src/utils/ensure_data_directory.cpp
         src/course_management.cpp
         include/course_management.h
+        include/main_menu.h
+        src/main_menu.cpp
+        include/schedule_menu.h
+        src/schedule_menu.cpp
 )
 

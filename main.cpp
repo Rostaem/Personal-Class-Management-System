@@ -3,13 +3,12 @@
 #include <limits>
 #include <fstream>
 #include <filesystem>
-#include "menu.h"
-#include "include/schedule_management.h"
 #include "include/attendance_tracker.h"
 #include "include/grade_tracker.h"
 #include "include/ensure_data_directory.h"
 #include "utils.h"
 #include "course_management.h"
+#include "main_menu.h"
 using namespace std;
 namespace fs = filesystem;
 
@@ -20,21 +19,22 @@ int main() {
 	CourseManager courseManager;
 
 	ensure_data_directory();
-	courseManager.load_courses();
+	//courseManager.load_courses();
 	attendanceTracker.load_attendance();
 	gradeTracker.load_grades();
 
-	Menu menu;
+	MainMenu mainMenu;
 
 	while (true) {
-		menu.display_main_menu();
+		mainMenu.display();
 		int choice = input_validation(1, 4, "Enter your choice (1-4): ");
 		if (choice == -1) {
 			cout << "Invalid input. Returning to menu..." << endl;
 			continue;
 		}
 
-		if (!menu.handle_main_menu_choice(choice, gradeTracker, attendanceTracker, courseManager)) {
+		// Check wether we can include this in the MainMenu class
+		if (!mainMenu.handle_choice(choice, courseManager)) {
 			break;
 		}
 	}
