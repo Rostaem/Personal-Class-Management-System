@@ -95,6 +95,8 @@ void CourseManager::view_courses() {
     }
 
     cout << setfill('-') << setw(WIDTH) << "" << endl;
+
+    cout << right << setfill(' ');
 }
 
 void CourseManager::save_courses() {
