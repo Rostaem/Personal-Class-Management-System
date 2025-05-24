@@ -17,6 +17,7 @@ protected:
 
 	// Helper function for formatting borders and centered text (used for submenus and main menu)
 	void format_box(const string& text, char border_char, int width) const;
+	void display_submenu(const string& title, const vector<string>& options) const;
 
 public:
 	// Default constructor

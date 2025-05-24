@@ -38,6 +38,7 @@ bool MainMenu::handle_choice(int choice, GradeTracker& gradeTracker,
 
     switch (choice) {
         case 1:
+            // scheduleMenu.display()
             scheduleManager.manage_schedule();
             break;
         case 2:
