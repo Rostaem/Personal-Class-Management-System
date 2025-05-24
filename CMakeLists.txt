@@ -23,5 +23,7 @@ add_executable(Personal_Class_Management_System
         include/course_management.h
         include/main_menu.h
         src/main_menu.cpp
+        include/schedule_menu.h
+        src/schedule_menu.cpp
 )
 

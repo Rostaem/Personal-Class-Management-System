@@ -17,6 +17,7 @@ protected:
 
 	// Helper function for formatting borders and centered text (used for submenus and main menu)
 	void format_box(const string& text, char border_char, int width) const;
+	void display_submenu(const string& title, const vector<string>& options) const;
 
 public:
 	// Default constructor
@@ -26,10 +27,8 @@ public:
 	virtual ~Menu() = default;
 
 	// Methods that can be overridden by derived classes
-	virtual void display() const = 0;
-	virtual bool handle_choice(int choice, GradeTracker& gradeTracker,
-						   AttendanceTracker& attendanceTracker,
-						   CourseManager& courseManager) = 0;
+	virtual void display() = 0;
+	virtual bool handle_choice(int choice) = 0;
 };
 
 #endif // MENU_H

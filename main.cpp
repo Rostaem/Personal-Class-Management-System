@@ -20,7 +20,7 @@ int main() {
 	CourseManager courseManager;
 
 	ensure_data_directory();
-	courseManager.load_courses();
+	//courseManager.load_courses();
 	attendanceTracker.load_attendance();
 	gradeTracker.load_grades();
 
@@ -34,7 +34,8 @@ int main() {
 			continue;
 		}
 
-		if (!mainMenu.handle_choice(choice, gradeTracker, attendanceTracker, courseManager)) {
+		// Check wether we can include this in the MainMenu class
+		if (!mainMenu.handle_choice(choice)) {
 			break;
 		}
 	}
