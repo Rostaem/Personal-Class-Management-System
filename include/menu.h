@@ -28,7 +28,7 @@ public:
 
 	// Methods that can be overridden by derived classes
 	virtual void display() = 0;
-	virtual bool handle_choice(int choice) = 0;
+	virtual bool handle_choice(int choice, CourseManager& courseManager) = 0;
 };
 
 #endif // MENU_H

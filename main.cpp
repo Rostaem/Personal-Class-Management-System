@@ -3,7 +3,6 @@
 #include <limits>
 #include <fstream>
 #include <filesystem>
-#include "include/schedule_management.h"
 #include "include/attendance_tracker.h"
 #include "include/grade_tracker.h"
 #include "include/ensure_data_directory.h"
@@ -35,7 +34,7 @@ int main() {
 		}
 
 		// Check wether we can include this in the MainMenu class
-		if (!mainMenu.handle_choice(choice)) {
+		if (!mainMenu.handle_choice(choice, courseManager)) {
 			break;
 		}
 	}

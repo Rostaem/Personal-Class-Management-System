@@ -17,7 +17,9 @@ private:
 
 public:
 	CourseManager() {
-		load_courses();
+		if (courses.size() == 0) {
+			load_courses();
+		}
 	}
 	void add_course();
 	void delete_course();

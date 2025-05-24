@@ -2,7 +2,6 @@
 #include "grade_tracker.h"
 
 #include "main_menu.h"
-#include "schedule_management.h"
 #include "utils/utils.h"
 
 using namespace std;

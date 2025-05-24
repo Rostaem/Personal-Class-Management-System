@@ -1,5 +1,4 @@
 #include "main_menu.h"
-#include "schedule_management.h"
 #include <iostream>
 #include <iomanip>
 
@@ -32,12 +31,12 @@ void MainMenu::display() {
     }
 }
 
-bool MainMenu::handle_choice(int choice) {
+bool MainMenu::handle_choice(int choice, CourseManager& courseManager) {
 
     switch (choice) {
         case 1:
             scheduleMenu.display();
-            scheduleMenu.handle_choice(0);
+            scheduleMenu.handle_choice(0, courseManager);
             //scheduleManager.manage_schedule();
             break;
         case 2:
